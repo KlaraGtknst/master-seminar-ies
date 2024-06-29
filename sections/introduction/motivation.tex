@@ -1,9 +1,14 @@
 In order to explain why the proximity of generated samples to the anchor is relevant to the efficiency during training, 
 one can consider a simple example in Euclidean space.
 Imagine images as input to a \ac{nn}, which projects them onto $f_{\theta}(x) \in \mathbb{R}^d$, where $theta$ are the parameters of the \ac{nn}.
+The effect of the distance between the anchor and the positive (negative) sample on the loss is visualized in \autoref{fig:hard_easy_samples_dist_effect_loss}.
+
 
 \begin{figure}[htbp]
     \centering
     \includesvg[width=300pt]{images/Hard_easy_samples_dist_effect_loss}
-    \caption{svg image}
+    \caption{The impact of the distance between a generated sample and its anchor on the loss function.
+    Hard samples convey more (gradient) information than easy samples and thus, have a higher loss value.
+    While distant positive pairs are considered hard, for negative samples, small proximity ones are considered hard.}
+    \label{fig:hard_easy_samples_dist_effect_loss}
 \end{figure}
