@@ -1,4 +1,7 @@
 llncsdoc.pdf
-main.fls
-main.pdf
-main.fdb_latexmk
+# ignore all main.* files except main.tex
+main.*
+!main.tex
+# pdfs
+*.pdf
+*.pdf_tex
