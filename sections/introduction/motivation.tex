@@ -1,0 +1,9 @@
+In order to explain why the proximity of generated samples to the anchor is relevant to the efficiency during training, 
+one can consider a simple example in Euclidean space.
+Imagine images as input to a \ac{nn}, which projects them onto $f_{\theta}(x) \in \mathbb{R}^d$, where $theta$ are the parameters of the \ac{nn}.
+
+\begin{figure}[htbp]
+    \centering
+    \includesvg[width=300pt]{images/Hard_easy_samples_dist_effect_loss}
+    \caption{svg image}
+\end{figure}
