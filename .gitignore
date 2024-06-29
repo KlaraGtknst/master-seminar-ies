@@ -5,3 +5,5 @@ main.*
 # pdfs
 *.pdf
 *.pdf_tex
+# aux files
+*.aux
