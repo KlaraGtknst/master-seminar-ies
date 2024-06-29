@@ -2,7 +2,13 @@
 %
 \usepackage[T1]{fontenc}
 
+\usepackage{amsfonts}
+
 \usepackage{graphicx}
+
+\usepackage{svg}
+
+\usepackage{acronym}
 
 \newcommand{\topic}{Approaches for finding sample pairs in contrastive learning}
 \newcommand{\authorA}{Klara M. Gutekunst}
@@ -14,6 +20,8 @@
 %\urlstyle{rm}
 %
 \begin{document}
+
+\input{acronyms}
 %
 \title{\topic}
 %
@@ -30,9 +38,8 @@
 %
 % include: speed bonus, no reloads, but no nesting, forces page break after and before input
 \input{sections/introduction/abstract}
-%
-%
-%
+
+\input{sections/introduction/motivation}
 
 
 % ---- Bibliography ----
