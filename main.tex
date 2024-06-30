@@ -23,7 +23,6 @@
 %
 \begin{document}
 
-\input{acronyms}
 %
 \title{\topic}
 %
@@ -41,15 +40,31 @@
 % include: speed bonus, no reloads, but no nesting, forces page break after and before input
 \input{sections/introduction/abstract}
 
+\section{Introduction}\label{sec:introduction}
+
+\input{sections/main_part/instance_recognition}
+
 \input{sections/introduction/motivation}
 
+% main part
+
+
+
+\input{sections/main_part/positive_samples}
+
+\input{sections/main_part/negative_samples}
+
+\input{sections/main_part/related_work}
+
+% end
 
 % ---- Bibliography ----
-eg \cite{texbook}
+
 \bibliographystyle{splncs04}
 \bibliography{references}
 
 
 
+\input{acronyms}
 
 \end{document}
