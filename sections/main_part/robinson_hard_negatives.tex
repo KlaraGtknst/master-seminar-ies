@@ -3,8 +3,60 @@
 Since positive pairs ($x$, $x^+$) are considered to originate from the same class, we denote $\rho(c), c \in \mathcal{C}$ as the distribution over the latent classes.
 Moreover, let $h: \mathcal{X} \rightarrow \mathcal{C}$ be the ground truth assigning class labels $c \in \mathcal{C}$ to inputs $x \in \mathcal{X}$.
 Hence, $x \sim x'$ if $h(x) = h(x')$.
+Assuming that $\rho(c)$ is uniformly distributed, and that $x^- \sim q = p$ where the anchor $x$ 
+is drawn from the data distribution $p$, \cite{robinson_contrastive_2021} 
+propose a novel approach to sample hard negatives from $q \neq p$.
+
+This method balances both the risk of sampling \ac{fn} and the degree of hardness of the samples obtained.
+Moreover, via the concentration parameter $\beta$, the user can decide how hard the negatives should be and thus, how likely they have the same target as the anchor.
+Large values of $\beta$ lead to sampling very hard negative samples.
+The authors of \cite{robinson_contrastive_2021} propose negative samples from $q^-_{\beta}(x^-)$, 
+which enforces $x$, $x^-$ having different classes by conditioning on dissimilar classes.
+By computing a scalar product of both representations $f(x)$, $f(x^-)$ in \eqref{eq:q_beta}, 
+they encourage similar represented samples.
+Unfortunately, it is unclear how to sample from $q^-_{\beta}(x^-)$ and thus, 
+the authors propose a way to rewrite the equation to facilitate sampling.
+
+\begin{align} 
+    q^-_{\beta}(x^-) = q_\beta(x^-|h(x) \neq h(x^-)) \propto \exp(\beta f(x)^\text{T}f(x^-))\cdot p(x^-) 
+\label{eq:q_beta}
+\end{align} 
+
+
+Since sampling could both yield \ac{fn} and \ac{tn}, it is possible to rewrite \eqref{eq:q_beta_minus} 
+displaying both cases in \eqref{eq:fn_tn}.
+The first term corresponds to the probability of sampling \ac{tn}, i.e. $h(x) \neq h(x')$,
+ while the second term corresponds to the probability of sampling \ac{fn} with $x \sim x'$.
+
+ \begin{align}
+    q_\beta(x^-) &= \rho(c)q^{-}_\beta(x^-) + (1-\rho(c))q^{+}_\beta(x^-)
+    \label{eq:fn_tn}
+\end{align}
+
+The distribution $q^{+}_\beta(x^-)$ can described in more detail.
+Given that $x$ and $x^-$ are from the same class, 
+the probability of sampling $x^-$ is proportional to the exponential of the scalar product of the 
+representations of $x$ and $x^-$ as described in \eqref{eq:q_beta_plus}.
+
+\begin{align}
+    q^{+}_\beta(x^-) &= q_\beta(x^-|h(x) = h(x^-)) &\propto \exp(\beta f(x)^\text{T}f(x^-))\cdot p^+(x^-) 
+    \label{eq:q_beta_plus}
+\end{align}
+
+Finally, we can rewrite \eqref{eq:fn_tn} to obtain the desired distribution $q^-_{\beta}(x^-)$ as shown in \eqref{eq:q_beta_minus}.
+This version of the distribution allows for sampling from $q^-_{\beta}(x^-)$, since we can sample from $q_\beta(x^-) \approx p$ 
+and we can approximate $q^{+}_\beta(x^-)$ by sampling from a set of transformations.    % rejection sampling & Monte Carlo sampling
+
+\begin{align}
+    q^{-}_\beta(x^-) &= \frac{(q_\beta(x^-)-(1-\rho(c))q^{+}_\beta(x^-))}{\rho(c)} 
+    \label{eq:q_beta_minus}
+\end{align}
 
 
 
-
-\cite{robinson_contrastive_2021}
+% \begin{align*}
+%     q^{-}_\beta(x^-) &=  q_\beta(x^-|h(x) \neq h(x^-)) 
+% &\propto \exp(\beta f(x)^\text{T}f(x^-))\cdot p(x^-) 
+% \\&= \rho(c)q^{-}_\beta(x^-) + (1-\rho(c))q^{+}_\beta(x^-)
+% \\&= \rho(c)\frac{(q_\beta(x^-)-(1-\rho(c))q^{+}_\beta(x^-))}{\rho(c)} + (1-\rho(c))q_\beta(x^-|h(x) = h(x^-)) &\propto \rho(c)q^{-}_\beta(x^-) + \exp(\beta f(x)^\text{T}f(x^-))\cdot p^+(x^-) 
+% \end{align*}
