@@ -1,4 +1,5 @@
 \subsection{Adversarial Examples}\label{subsec:adversarial_examples}
+% idea of positive pair: fix one augmented sample (randomly) and choose most diverse adversarial perturbation for other sample
 
 \citeauthor{ho_contrastive_2020} propose the \ac{clae} method to generate adversarial examples 
 (both negative and positive) attacking the network and thus,
@@ -12,11 +13,31 @@ but to improve the representation of the network.
 \ac{clae} produces both positive and negative samples from the batch.
 Adversarial examples are generated from clean examples $x$.
 The authors want to select the optimal transformations $p_i, q_i \in \mathcal{T}$ for each sample $x_i$ in the batch.
-Optimal transformations are those that maximize the loss function as defined in \eqref{eq:clae_optimal_transformations}.
-However, the authors stress that this problem is not well-defined and 
-rather one should focus on the difference between both transformations.
+Optimal transformations are those that maximize the loss function $L_{cl}$.
+Since it is difficult to find two optimal transformations simultaneously, 
+\citeauthor{ho_contrastive_2020} propose fixing one transformation $q_i$ and 
+optimizing the other $p_i$ as defined in \eqref{eq:clae_optimal_transformations}.
+$q_i$ is sampled randomly from the set of transformations $\mathcal{T}$.
 
 \begin{equation}
-    {p^*_i, q^*_i} = \arg\max_{p_i, q_i \in \mathcal{T}} \sum_{i}^{}L_{cl}(x_i^{p_i}, x_i^{q_i}; \theta, \mathcal{T})
+    \left\{p^*_i\right\} = \arg\max_{\left\{p_i\right\} \in \mathcal{T}} \sum_{i}^{}L_{cl}(x_i^{p_i}, x_i^{q_i}; \theta, \mathcal{T}), q^*_i \sim \mathcal{T}
     \label{eq:clae_optimal_transformations}
 \end{equation}
+
+Due to the inefficiency of a complete search over $\mathcal{T}$, 
+the authors propose directly choosing an adversarial perturbation $x^{r_i}_i$ of the fixed augmentation $x_i^{q_i}$.
+Hence, they choose the perturbation $x^{r_i}_i = x^{q_i}_i + \delta^*_i$ from 
+$A(x^{q_i}_i) = \left\{x' | x' = x^{q_i}_i + \delta, \left\|\delta\right\|_p < \epsilon\right\}$,
+which leads to the most diverse positive pair ($x^{r_i}_i$, $x^{q_i}_i$).
+
+The mathematical details of obtaining $x^{r_i}_i$ are provided in \citet{ho_contrastive_2020}.
+The idea is that the loss function enforces 
+positive pair representations $f(x^{r_i}_i)$ and $f(x^{q_i}_i)$ to be close to each other,
+while representations of perturbations of different examples $f(x^{p_k}_k)$ and $f(x^{q_i}_i)$ are separated.
+
+Generally, any set of transformations $\mathcal{T}$ can be used to generate adversarial examples.
+\citeauthor{ho_contrastive_2020} use the \ac{fgsm} method which 
+produces adversarial augmentations in consideration of the whole batch.
+
+It is important to note that the usage of adversarial samples in training may result in 
+the degradation of the downstream classification accuracy.
