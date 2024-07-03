@@ -1,3 +1,22 @@
 \subsection{Adversarial Examples}\label{subsec:adversarial_examples}
 
-\citet{ho_contrastive_2020}
+\citeauthor{ho_contrastive_2020} propose the \ac{clae} method to generate adversarial examples 
+(both negative and positive) attacking the network and thus,
+can be considered the most challenging examples \cite{ho_contrastive_2020}.
+Adversarial attacks will induce a network in error.
+Adversarial training includes both clean and adversarial examples in the training set to defend against those attacks and 
+increase the network's robustness.
+However, according to \citeauthor{ho_contrastive_2020}, the aim is not to enhance robustness to attacks 
+but to improve the representation of the network.
+
+\ac{clae} produces both positive and negative samples from the batch.
+Adversarial examples are generated from clean examples $x$.
+The authors want to select the optimal transformations $p_i, q_i \in \mathcal{T}$ for each sample $x_i$ in the batch.
+Optimal transformations are those that maximize the loss function as defined in \eqref{eq:clae_optimal_transformations}.
+However, the authors stress that this problem is not well-defined and 
+rather one should focus on the difference between both transformations.
+
+\begin{equation}
+    {p^*_i, q^*_i} = \arg\max_{p_i, q_i \in \mathcal{T}} \sum_{i}^{}L_{cl}(x_i^{p_i}, x_i^{q_i}; \theta, \mathcal{T})
+    \label{eq:clae_optimal_transformations}
+\end{equation}
