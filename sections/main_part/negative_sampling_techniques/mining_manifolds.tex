@@ -2,3 +2,24 @@
 
 \citet{mining_manifolds_2018} combines different definitions of proximity to mine 
 for hard positives and negatives.
+
+
+\begin{figure}[h]%
+    \centering
+    \subfloat[\centering Euclidean $k$ nearest neighbour $NN^e_k$ (orange).]
+    {{\includegraphics[width=5cm]{images/euclidean_NN.png} }}%
+    \qquad
+    \subfloat[\centering Manifold $k$ nearest neighbour $NN^m_k$ (purple).]
+    {{\includegraphics[width=5cm]{images/manifold_NN.png} }}%
+    \qquad
+    \subfloat[\centering Hard positives $NN^m_k \textbackslash NN^e_k$(green).]
+    {{\includegraphics[width=5cm]{images/hard_positives_manifold.png} }}%
+    \qquad
+    \subfloat[\centering Hard negatives $NN^e_k \textbackslash NN^m_k$(red).]
+    {{\includegraphics[width=5cm]{images/hard_negatives_euclidean.png} }}%
+
+    \caption{Visualization of different proximity definitions and 
+    the hard negatives/positives from \citet{mining_manifolds_2018}.
+    The anchor is the black point.}%
+    \label{fig:mining_manifolds_vis}%
+\end{figure}
