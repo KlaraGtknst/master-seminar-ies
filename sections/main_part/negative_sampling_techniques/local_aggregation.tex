@@ -15,7 +15,8 @@ The level of \ac{la} $L(C_i,B_i | \theta, x_i)$
 characterizes the relative level of closeness within $C_i$ compared to $B_i$.
 $L(C_i,B_i | \theta, x_i)$ should be maximized.
 
-The set $B_i$ consists of the $k$ nearest neighbours of $z_i$ in the feature space.
+The set $B_i$ consists of the $k$ nearest neighbours of $z_i$ in terms of cosine distance 
+in the feature space.
 $k$ is a hyperparameter.
 In \citet{local_aggr_2019}, in order to construct $C_i$, 
 first $H$ $k$-means clusterings are performed with sligthly different conditions.
