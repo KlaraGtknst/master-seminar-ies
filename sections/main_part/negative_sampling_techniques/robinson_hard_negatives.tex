@@ -1,12 +1,7 @@
 \subsection{Robinson's Hard Negatives}\label{subsec:robinson_hard_negatives}
 
-Since positive pairs ($x$, $x^+$) are considered to originate from the same class, we denote $\rho(c), c \in \mathcal{C}$ as the distribution over the latent classes.
-Moreover, let $h: \mathcal{X} \rightarrow \mathcal{C}$ be the ground truth assigning class labels $c \in \mathcal{C}$ to inputs $x \in \mathcal{X}$.
-Hence, $x \sim x'$ if $h(x) = h(x')$.
-Assuming that $\rho(c)$ is uniformly distributed, and that $x^- \sim q = p$ where the anchor $x$ 
-is drawn from the data distribution $p$, \citet{robinson_contrastive_2021} 
+\citet{robinson_contrastive_2021} 
 propose a novel approach to sample hard negatives from $q \neq p$.
-
 This method balances both the risk of sampling \ac{fn} and the degree of hardness of the samples obtained.
 Moreover, via the concentration parameter $\beta$, the user can decide how hard the negatives should be and thus, how likely they have the same target as the anchor.
 Large values of $\beta$ lead to sampling very hard negative samples.

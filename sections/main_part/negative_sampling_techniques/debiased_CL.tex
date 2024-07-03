@@ -5,6 +5,8 @@ i.e., the selection of negative samples that have the same label as the anchor, 
 They denote sampling bias the phenomenon where anchor $x$ and negative sample $x^-$ are similar to each other.
 When randomly sampling negative samples from the data distribution $p(x)$ 
 a negative sample can inherently belong to the same latent class as the anchor.
+This phenomenon is illustrated in \autoref{fig:sampling_bias}a.
+The effect of sampling bias on the model's performance is illustrated in \autoref{fig:sampling_bias}b.
 
 \begin{figure}%
     \centering
@@ -15,3 +17,18 @@ a negative sample can inherently belong to the same latent class as the anchor.
     \caption{Visualization of sampling bias and its effect on the model's performance.}%
     \label{fig:sampling_bias}%
 \end{figure}
+
+\citeauthor{chuang_debiased_2020} assume a \ac{pu} learning scenario, 
+where a positive sample and an unlabeled dataset $p(x)$ are available.
+The positive distribution $p^+$ is mimicked by data augmentations.
+The empirical estimation of the objective is given in 
+\autoref{eq:debiasing_loss} from \citet{chuang_debiased_2020},
+which is easier to compute than the original objective.
+The negative samples $x^-$ are sampled from the data distribution $p(x)$.
+However, the authors added a correction term for positive samples $v$.
+The weighting factor $Q$ is used to balance the debiasing effect.
+
+\begin{equation}
+    \mathbb{E}_{x \sim p; x^+ \sim p^+}[{-\log{\frac{e^{f(x)^Tf(x^+)}}{e^{f(x)^Tf(x^+)}+ \frac{Q}{\tau^-}(\mathbb{E}_{x^- \sim p}[e^{f(x)^Tf(x^-)}]-\tau^+\mathbb{E}_{v \sim p^+}[e^{f(x)^Tf(v)}])}}}]
+    \label{eq:debiasing_loss}
+\end{equation}
