@@ -3,7 +3,7 @@ one can consider a simple example in Euclidean space.
 Imagine images as input to a \ac{nn}, which projects them onto $f_{\theta}(x) \in \mathbb{R}^d$, where $\theta$ are the parameters of the \ac{nn}.
 The effect of the distance between the anchor $x$ and the positive $x^+$ (negative $x^-$) sample on the loss is visualized in \autoref{fig:hard_easy_samples_dist_effect_loss}.
 Since difficult samples hold more (gradient) information, they have a higher loss value.
-Hence, similar negative pairs ($x$, $x^-$) are considered hard \cite{robinson_contrastive_2021}, while distant positive pairs ($x$, $x^+$) are considered hard.
+Hence, similar negative pairs ($x$, $x^-$) are considered hard \citet{robinson_contrastive_2021}, while distant positive pairs ($x$, $x^+$) are considered hard.
 
 \begin{figure}[h] % h = here, t = top, b = bottom, p = page of floats
     \centering
