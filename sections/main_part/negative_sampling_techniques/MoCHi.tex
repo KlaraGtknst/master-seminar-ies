@@ -1,1 +1,11 @@
 \subsection{MoCHi}\label{subsec:MoCHi}
+
+\citet{mochi_2020} state that most approaches to sampling negatives rely on 
+time-consuming updates of a memory bank or big batches to achieve good performance.
+They propose a method that computes samples online while claiming they introduce no computational overhead.
+
+% memory bank
+They use a memory bank $Q$ of size $| Q | = K$ to store negative samples.
+There are different ways to choose $K$ by either saving the whole dataset, a queue of last batches,
+or all images in the current batch.
+
