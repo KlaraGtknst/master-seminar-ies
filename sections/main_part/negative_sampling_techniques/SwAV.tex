@@ -1,1 +1,37 @@
-\subsection{SwAV}\label{subsec:SwAV}
+\subsection{\acl{swav}}\label{subsec:SwAV}
+
+\citet{swav_2020} proposed a novel approach to mine positive samples, called \ac{swav}.
+It is an online clustering algorithm that works on batches of any size.
+If the batch size $B$ is too small to form $K$ clusters the instances are augmented 
+with instances from a previous batch, 
+but only the original $B$ instances are considered in the loss function.
+The approach forces the clusters to have roughly the same size, i.e. form an equipartition.
+
+\citeauthor{swav_2020} claim their method needs neither a memory bank nor a momentum encoder.
+The positive sample $x_{nt}$ for an instance $x_n$ is obtained by applying a 
+random augmentation $t \in \mathcal{T}$ to $x_n$.
+After embedding both the original and the augmented instance, the loss function is computed 
+as defined in \eqref{eq:swav_loss}.
+
+\begin{equation}
+    L(z_n, z_{nt}) = l(z_n, q_{nt}) + l(z_{nt}, q_n)
+    \label{eq:swav_loss}
+\end{equation}
+
+The soft cluster assignments $q_n, q_{nt}$ for $x_n, x_{nt}$ respectively 
+are used with the other instance's embedding to compute the loss.
+The idea is to swap the assignments between the two views of the same image to encourage 
+similar cluster assignments for similar instances.
+The loss $l(z_n, q_{nt})$ is a cross-entropy loss that uses the similarity between the prototype 
+of the desired cluster and the embedding of the instance $z_n$ as the probability in the logarithm.
+
+\citeauthor{swav_2020} also introduce multi-crop, an augmentation technique that uses different 
+crops of the same image.
+They include two crops of standard size and standard resolution, 
+and $V$ smaller size and low-resolution augmentations.
+The resulting loss function is defined in \eqref{eq:swav_loss_multicrop}.
+
+\begin{equation}
+    L(z_{t_{1}}, \cdots , z_{t_{V+2}})= \sum_{i\in \left\{ 1,2 \right\} }^{}\sum_{v=1}^{V+2} L_{v \neq i}(z_{t_{v}}, q_{t_{i}})
+    \label{eq:swav_loss_multicrop}
+\end{equation}
