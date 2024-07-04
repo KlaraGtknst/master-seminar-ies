@@ -3,5 +3,5 @@
 The \ac{moco} is described as a compromise between a complete memory bank and large batches \citet{mochi_2020}.
 It is a second encoder that trails the main anchor encoder with a higher momentum.
 Once a positive pair is selected, all $K$ negative samples in $Q$ are encoded with the current \ac{moco}.
-Afterward, the \ac{moco} is updated with the current anchor encoder and higher momentum.
+Afterward, the \ac{moco} is updated with the current anchor encoder and higher momentum  \citet{mochi_2020,li_prototypical_2021}. 
 These steps are repeated for each positive pair.
