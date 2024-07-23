@@ -8,7 +8,8 @@ However, this approach is prone to two issues \citet{robinson_contrastive_2021}:
 
 % oracle learning
 Some approaches use a so-called class oracle to boost the performance of the model.
-Usually, \acp{fn}, i.e. samples considered negative that belong to the latent class of the anchor,
- can be sampled during hard negative mining.
-This approach removes the \acp{fn} from the set of negative samples and thus, 
+Usually, \acp{fn} \cite{grape_2024}, i.e. samples considered negative that belong to the latent class of the anchor,
+ can be sampled during hard negative mining. 
+Hence, samples of the same class are pushed further apart in the embedding space. 
+To avoid performance deterioration, this approach removes the \acp{fn} from the set of negative samples and thus, 
 increases the performance of the model \citet{mochi_2020}.
