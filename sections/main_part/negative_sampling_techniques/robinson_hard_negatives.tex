@@ -1,5 +1,7 @@
 \subsection{Robinson's Hard Negatives}\label{subsec:robinson_hard_negatives}
 
+% TODO: Was sollen Verteilungen abbilden? Was approximieren sie? Warum sampeln? Intuition
+
 \citet{robinson_contrastive_2021} 
 propose a novel approach to sample hard negatives from $q \neq p$.
 This method balances both the risk of sampling \ac{fn} and the degree of hardness of the samples obtained.
@@ -20,8 +22,8 @@ the authors propose a way to rewrite the equation to facilitate sampling.
 
 Since sampling could both yield \ac{fn} and \ac{tn}, it is possible to rewrite \eqref{eq:q_beta_minus} 
 displaying both cases in \eqref{eq:fn_tn}.
-The first term corresponds to the probability of sampling \ac{tn}, i.e. $h(x) \neq h(x')$,
- while the second term corresponds to the probability of sampling \ac{fn} with $x \sim x'$.
+The first term corresponds to the probability of sampling \ac{tn}, i.e. $h(x) \neq h(x^-)$,
+ while the second term corresponds to the probability of sampling \ac{fn} with $x \sim x^-$.
 
 \begin{align}
     q_\beta(x^-) &= \rho(c)q^{-}_\beta(x^-) + (1-\rho(c))q^{+}_\beta(x^-)

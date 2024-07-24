@@ -1,5 +1,7 @@
 \subsection{\acl{mochi}}\label{subsec:MoCHi}
 
+% TODO: Experimente zum s, s' Verhältnis
+
 \citet{mochi_2020} state that most approaches to sampling negatives rely on 
 time-consuming updates of a memory bank or big batches to achieve good performance.
 They propose \ac{mochi}, a method that computes samples online while claiming they introduce no computational overhead.
@@ -17,7 +19,7 @@ The definition of \ac{mochi}($N, s, s'$) is as follows:
     \item $s'$: Number of samples to generate with approach 2.
 \end{enumerate}
 For both approaches to generating negative samples, the authors use the same memory bank $Q$.
-Given a fixed anchor, firstly, $Q$ is ordered in descending similarity to the anchor representation 
+Given a fixed anchor, firstly, $Q$ is ordered in descending similarity to the anchor representation     % TODO: similarity measure
 in the feature space producing $\tilde{Q}$.
 Secondly, all but the first, i.e. most similar, $N$ samples are discarded from $\tilde{Q}$.
 % first approach
@@ -47,7 +49,7 @@ This approach is considered to produce even harder negative samples than the fir
 % update of memory bank
 Using \eqref{eq:mochi_appr1} and \eqref{eq:mochi_appr2}, 
 $s$ and $s'$ hard negative samples are generated respectively.
-Afterward, the similarity of the generated sample $h_k$ (or $h_k'$ respectively) 
+Afterwards, the similarity of the generated sample $h_k$ (or $h_k'$ respectively) 
 to the anchor $q$ is calculated via $\frac{q^T h_k}{\tau}$.
 This similarity is used to update the memory bank $\tilde{Q}$ 
 by inserting the new sample.

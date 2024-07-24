@@ -1,5 +1,8 @@
 \subsection{\acl{pcl}}\label{subsec:PCL}
 
+% TODO: M clusters pro Iteration ist ganz schön teuer, oder? Wie oft update?
+% TODO: Momentum encoder, wie funktioniert das? smoothing/ averaging?
+
 \citet{li_prototypical_2021} use clustering in the feature space to optimize the sample's representation.
 They assign multiple prototypes of different granularity to each sample.
 The prototypes are found by clustering.
@@ -41,7 +44,7 @@ The ProtoNCE loss from \eqref{eq:ProtoNCE} extends the InfoNCE from \eqref{eq:In
 by not only enforcing similarity between the sample and 
 one positive sample while retaining dissimilarity to $r$ negative samples, 
 but also considering its prototypes $c^m_s$. 
-To improve the stability of the results, $M$ clusters with different numbers of clusters $k_m$ are 
+To improve the stability of the results, $M$ clusterings with different numbers of clusters $k_m$ are 
 executed.
 Different numbers of clusters lead to different granularity of the prototypes 
 and a hierarchical structure being encoded into the loss function.
@@ -52,8 +55,8 @@ and a hierarchical structure being encoded into the loss function.
 \end{equation}
 
 \begin{equation}
-    \mathcal{L}_{ProtoNCE}=\mathcal{L}_{InfoNCE} - \sum_{i=1}^{N} \frac{1}{M} \sum_{m=1}^{M} \log\frac{\exp \frac{z_i\cdot c_s^m}{\phi^m_s}}{\sum_{j=0}^{r}\exp \frac{z_i\cdot c_j^m}{\phi^m_j}}
+    \mathcal{L}_{ProtoNCE}=\mathcal{L}_{InfoNCE} - \sum_{i=1}^{N} \frac{1}{M} \sum_{m=1}^{M} \log\frac{\exp \frac{z_i\cdot c_s^m}{\phi^m_s}}{\sum_{j=0}^{k_m}\exp \frac{z_i\cdot c_j^m}{\phi^m_j}}
     \label{eq:ProtoNCE}
 \end{equation}
 
-% M clusters pro Iteration ist ganz schön teuer, oder?
+

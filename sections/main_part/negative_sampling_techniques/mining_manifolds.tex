@@ -1,5 +1,7 @@
 \subsection{Mining on manifolds}\label{subsec:mining_manifolds} % cooler approach
 
+% TODO: Wie findet man manifolds?
+
 \citet{mining_manifolds_2018} combines different definitions of proximity to mine 
 for hard positives and negatives as displayed in \autoref{fig:mining_manifolds_vis}.
 Given an anchor, the neighbours on the same manifold which are not neighbours in terms of 
@@ -41,13 +43,13 @@ The pool of hard negatives is defined as $NN^e_k \textbackslash NN^m_k$.
 $NN^e_k$ is ordered by descending Euclidean distance to the anchor to keep the hardest samples.
 
 % selection of anchors
-\textcolor{red}{soll ich das ausführlicher beschreiben?\\}
+\textcolor{red}{soll ich das ausführlicher beschreiben? Ja, <0.5 Seiten Formeln\\}
 The anchors are selected such that they are diverse and relevant 
 exploiting the structural properties of the data and the method.
 This process is described in more detail in \citet{mining_manifolds_2018}.
 
 % loss functions
-\textcolor{red}{soll ich das ausführlicher beschreiben?\\}
+\textcolor{red}{soll ich das ausführlicher beschreiben? Ja\\}
 The authors propose multiple loss functions to train the model.
 They, for instance, apply the contrastive loss, the triplet loss, 
 and weighted versions of both contrastive and triplet loss.
@@ -55,6 +57,7 @@ and weighted versions of both contrastive and triplet loss.
 % examples
 \textcolor{red}{weg?\\}
 
+% TODO: Wie positives generiert?
 \begin{figure}[h] % h = here, t = top, b = bottom, p = page of floats
     \centering
     \includegraphics[width=360pt]{images/mining_manifold_qualitative_analysis.png}
@@ -76,6 +79,7 @@ and weighted versions of both contrastive and triplet loss.
     \label{fig:manifold_mining_qualitative_analysis}
 \end{figure}
 
+% TODO: Wie positives generiert? Wie ist eine Klasse definiert?
 \begin{figure}[h] % h = here, t = top, b = bottom, p = page of floats
     \centering
     \includegraphics[width=360pt]{images/mining_manifold_examples.png}
