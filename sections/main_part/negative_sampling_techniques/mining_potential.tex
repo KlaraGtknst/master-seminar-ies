@@ -1,4 +1,4 @@
-\section{Mining potential negatives}\label{sec:mining_potential_negatives}
+\subsection{Mining potential negatives}\label{subsec:mining_potential_negatives}
 % TODO: better not use, bc EMA architecture with online and target encoder
 
 \citet{mining_potential_2024} propose both a positive and negative sampling strategy for \ac{cl}.
@@ -24,3 +24,9 @@ according to its similarity to the query embedding $s_{qi}$ relative to all othe
 Similarly, the authors argue that the negative sampling strategy should be able to mine negatives, 
 which provide valuable information, i.e. not too easy, and which are not \acp{fn}, i.e. too difficult.
 Negative samples are other samples.
+The first step of the \ac{pnsm} approach is to collect 
+those samples similar to positive ones in terms of a similarity metric as potential negative samples.
+Negative samples are then chosen via a probability distribution based on the squared difference of 
+the similarity between the query and potential negative sample embedding 
+and the similarity between the query and potential positive sample embedding.
+Close (similar) negative samples to positive samples are more likely sampled via Bernoulli sampling.
