@@ -3,7 +3,7 @@
 % TODO: M clusters pro Iteration ist ganz schön teuer, oder? Wie oft update?
 % TODO: Momentum encoder, wie funktioniert das? smoothing/ averaging?
 
-\citet{li_prototypical_2021} use clustering in the feature space to optimize the sample's representation.
+\citet{PCL_2021} use clustering in the feature space to optimize the sample's representation.
 They assign multiple prototypes of different granularity to each sample.
 The prototypes are found by clustering.
 In terms of \ac{cl}, the prototypes are considered positive samples.
@@ -15,7 +15,7 @@ The prototypes are latent variables.
 \begin{figure}[h] % h = here, t = top, b = bottom, p = page of floats
     \centering
     \includegraphics[width=360pt]{images/PCL_training.png}
-    \caption{Illustration from \citet{li_prototypical_2021}.
+    \caption{Illustration from \citet{PCL_2021}.
     The training of the \ac{pcl} algorithm is shown.
     $M$ $k_m$-means clusterings based on the feature space defined by the momentum encoder 
     are performed in the E-step.
