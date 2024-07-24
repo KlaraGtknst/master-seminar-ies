@@ -1,5 +1,8 @@
-\subsection{Adversarial Examples}\label{subsec:adversarial_examples}
+\subsection{\acl{clae}}\label{subsec:adversarial_examples}
 % idea of positive pair: fix one augmented sample (randomly) and choose most diverse adversarial perturbation for other sample
+
+% TODO: FGSM
+% TODO: Wie generiere ich adversarial perturbations?
 
 \citeauthor{ho_contrastive_2020} propose the \ac{clae} method to generate adversarial examples 
 (both negative and positive) attacking the network and thus,
@@ -20,7 +23,7 @@ optimizing the other $p_i$ as defined in \eqref{eq:clae_optimal_transformations}
 $q_i$ is sampled randomly from the set of transformations $\mathcal{T}$.
 
 \begin{equation}
-    \left\{p^*_i\right\} = \arg\max_{\left\{p_i\right\} \in \mathcal{T}} \sum_{i}^{}L_{cl}(x_i^{p_i}, x_i^{q_i}; \theta, \mathcal{T}), q^*_i \sim \mathcal{T}
+    \left\{p^*_i\right\} = \arg\max_{\left\{p_i\right\} \in \mathcal{T}} \sum_{i}^{}L_{cl}(x_i^{p_i}, x_i^{q_i}; \theta, \mathcal{T}), q_i \sim \mathcal{T}
     \label{eq:clae_optimal_transformations}
 \end{equation}
 
