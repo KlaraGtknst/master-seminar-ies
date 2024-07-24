@@ -1,1 +1,68 @@
 \section{Related Work}\label{sec:related_work}
+
+% sampling from distributions
+Scientists try to describe the data by means of distributions.
+Since \ac{cl} is a form of unsupervised learning, the true data distribution of the different classes is often not available.
+Therefore, some scientists formulate assumptions or simplify the problem.
+Possible assumptions include that the data distribution is uniform. 
+Sometimes, scientists use the overall data distribution as a proxy for the negative sample distribution.
+In other cases, the data distribution is approximated by a \ac{bmm}.
+This approach is motivated by carrying out exhaustive tests on labelled data.
+
+Moreover, research faces the challenge of avoiding \ac{fn} samples.
+To this end, scientists have proposed different strategies, which mostly boil down to 
+encoorperating the possibility of a potential negative sample being a \ac{tn}.
+
+
+% augmentation strategies
+In addition, data augmentation is a common technique to create positive samples.
+Often, an augmentation strategy is randomly sampled from a set of possible augmentations.
+The motivation behind this is to increase the diversity of the positive samples 
+in order to force the model to learn features invariant to translations.
+
+
+% clustering/ distance
+Another approach is to work on distances or similarities defined on embedding spaces.
+Multiple methods have been proposed to generate samples via clustering.
+Some ideas focus on high intra-cluster similarities to improve the alignment of the embeddings \citet{DRC_2020}.
+Other ideas define different neighbour regions to condense representation within an inner radius 
+while repelling samples from an outer radius \citet{local_aggr_2019}.
+Another approach is to consider both Euclidean distance and semantic similarity to generate hard samples \citet{mining_manifolds_2018}.
+\citet{PCL_2021}
+
+
+% memory bank
+In addition, a memory bank is used to store embeddings of the data.
+By filling these memory banks with embeddings of negative samples as proposed in \citet{mochi_2020}, 
+it is possible to generate hard negative samples.
+\citeauthor{mochi_2020} propose two approaches for generating new hard negatives: 
+Based on the most difficult samples currently stored in the memory bank, two of them are randomly selected and mixed.
+The second approach is to use only one of the existing negative samples and create a linear combination with the anchor as a new sample.
+
+\citet{progcl_2022} propose a method that extends the idea of \citet{mochi_2020} by weighting randomly selected negative samples 
+with their relative similarity to the anchor when mixing them to create more difficult negative samples.
+
+It is also possible to use the memory bank to store the embeddings of the positive samples.
+Similarly, either randomly chosen samples can be used individually or 
+the samples can be weighted by their hardness during loss calculation \citet{mining_potential_2024}.
+
+
+% other work
+% EM-algorithm
+Multiple approaches use the \ac{em} algorithm.
+Both \citet{DRC_2020} and \citet{PCL_2021} are clustering-based methods while \citet{progcl_2022} is a distribution-based method.
+
+% temperature
+Since most approaches use a temperature parameter to control the hardness of the negative samples, 
+\citet{CL_temp_2021,grape_2024} investigate the impact of the temperature on the performance of the model.
+They find that the \ac{cl} loss function optimizes hard samples by penalizing them according to their hardness.
+If the temperature is small, the closest points are penalized and others are not.
+This can result in a uniform distribution of the embedding space.
+
+% curriculum learning
+\citet{curricular_weighting_2024} propose a curriculum learning approach to generate hard negative samples.
+They outline why curriculum learning is beneficial for \ac{cl} and how it can be implemented.
+
+% data scheduling
+\citet{PIC_2020} propose a method to schedule the data for training 
+to reduce the periods within which a sample is not considered for training.
