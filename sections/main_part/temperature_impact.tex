@@ -1,7 +1,7 @@
 % effect of temperature on contrastive learning loss function & embedding space
 
 The parameter $\tau$ is called temperature.
-\citet{wang_understanding_2021} have carried out an exhaustive study on the impact of temperature on the loss function of contrastive learning.
+\citet{wang_understanding_2021} have carried out an exhaustive study on the impact of temperature on the loss function of \ac{cl}.
 They found that the contrastive loss function optimizes hard samples by penalizing them according to their hardness.
 Small temperatures $\tau$ penalize very hard negative samples, i.e. similar to the anchor.
 Hence, the samples' representations are pushed further apart and thus, the embedding space becomes more uniformly distributed.
@@ -46,6 +46,6 @@ However, when $\tau$ is too small, the embedding spaces' semantic structure dete
 % \end{figure}
 
 % graph models
-\citet{grape_2024} have worked on a contrastive learning approach on graphs called \ac{grape}.
+\citet{grape_2024} have worked on a \ac{cl} approach on graphs called \ac{grape}.
 According to \citeauthor{grape_2024}, small values of $\tau$ lead to strong repulsive forces on neighboring samples.
 Larger values of $\tau$, on the other hand, exert weaker repulse forces.
