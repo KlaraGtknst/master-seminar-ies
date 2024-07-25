@@ -4,13 +4,13 @@
 % TODO: FGSM
 % TODO: Wie generiere ich adversarial perturbations?
 
-\citeauthor{ho_contrastive_2020} propose the \ac{clae} method to generate adversarial examples 
+\citeauthor{adversarial_2020} propose the \ac{clae} method to generate adversarial examples 
 (both negative and positive) attacking the network and thus,
-can be considered the most challenging examples \cite{ho_contrastive_2020}.
+can be considered the most challenging examples \cite{adversarial_2020}.
 Adversarial attacks will induce a network in error.
 Adversarial training includes both clean and adversarial examples in the training set to defend against those attacks and 
 increase the network's robustness.
-However, according to \citeauthor{ho_contrastive_2020}, the aim is not to enhance robustness to attacks 
+However, according to \citeauthor{adversarial_2020}, the aim is not to enhance robustness to attacks 
 but to improve the representation of the network.
 
 \ac{clae} produces both positive and negative samples from the batch.
@@ -18,7 +18,7 @@ Adversarial examples are generated from clean examples $x$.
 The authors want to select the optimal transformations $p_i, q_i \in \mathcal{T}$ for each sample $x_i$ in the batch.
 Optimal transformations are those that maximize the loss function $L_{cl}$.
 Since it is difficult to find two optimal transformations simultaneously, 
-\citeauthor{ho_contrastive_2020} propose fixing one transformation $q_i$ and 
+\citeauthor{adversarial_2020} propose fixing one transformation $q_i$ and 
 optimizing the other $p_i$ as defined in \eqref{eq:clae_optimal_transformations}.
 $q_i$ is sampled randomly from the set of transformations $\mathcal{T}$.
 
@@ -33,13 +33,13 @@ Hence, they choose the perturbation $x^{r_i}_i = x^{q_i}_i + \delta^*_i$ from
 $A(x^{q_i}_i) = \left\{x' | x' = x^{q_i}_i + \delta, \left\|\delta\right\|_p < \epsilon\right\}$,
 which leads to the most diverse positive pair ($x^{r_i}_i$, $x^{q_i}_i$).
 
-The mathematical details of obtaining $x^{r_i}_i$ are provided in \citet{ho_contrastive_2020}.
+The mathematical details of obtaining $x^{r_i}_i$ are provided in \citet{adversarial_2020}.
 The idea is that the loss function enforces 
 positive pair representations $f(x^{r_i}_i)$ and $f(x^{q_i}_i)$ to be close to each other,
 while representations of perturbations of different examples $f(x^{p_k}_k)$ and $f(x^{q_i}_i)$ are separated.
 
 Generally, any set of transformations $\mathcal{T}$ can be used to generate adversarial examples.
-\citeauthor{ho_contrastive_2020} use the \ac{fgsm} method which 
+\citeauthor{adversarial_2020} use the \ac{fgsm} method which 
 produces adversarial augmentations in consideration of the whole batch.
 
 It is important to note that the usage of adversarial samples in training may result in 
