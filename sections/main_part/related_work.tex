@@ -1,28 +1,41 @@
 \section{Related Work}\label{sec:related_work}
 
 % sampling from distributions
-Scientists try to describe the data by means of distributions.
-Since \ac{cl} is a form of unsupervised learning, the true data distribution of the different classes is often not available.
+Naturally, when using descriptive statistics to describe data, (empirical estimated) distributions play a crucial role.
+Therefore, some researchers obtain their positive and negative samples from distributions.
+Unfortunately, since \ac{cl} is a form of unsupervised learning, 
+the true data distribution of the different classes is often not available.
 Therefore, some scientists formulate assumptions or simplify the problem.
-Possible assumptions include that the data distribution is uniform. 
-Sometimes, scientists use the overall data distribution as a proxy for the negative sample distribution.
-In other cases, the data distribution is approximated by a \ac{bmm}.
-This approach is motivated by carrying out exhaustive tests on labelled data.
+Possible assumptions include that the data distribution is uniform,
+or approximating the positive sample distribution by sampling from a set of transformations 
+or using the overall data distribution as a proxy for the negative sample distribution \citet{chuang_debiased_2020,robinson_contrastive_2021}.
+In other cases, the class distributions are approximated using \acp{bmm} \citet{progcl_2022}.
 
-Moreover, research faces the challenge of avoiding \ac{fn} samples.
+Given the assumption that the data distribution sufficiently well approximated, 
+it is possible to consider probabilities of samples being \acp{fn} during the selection process of samples.
+Needless to say, the goal is to avoid sampling \acp{fn} as negative samples.
 To this end, scientists have proposed different strategies, which mostly boil down to 
-encoorperating the possibility of a potential negative sample being a \ac{tn}.
+incorporating the possibility of a potential negative sample being a \ac{fn} or \ac{tn} 
+\citet{chuang_debiased_2020,robinson_contrastive_2021,progcl_2022}.
 
 
 % augmentation strategies
-In addition, data augmentation is a common technique to create positive samples.
+Irrespective of its usage in the context of estimation of distributions, 
+data augmentation is a common technique to create positive samples.
 Often, an augmentation strategy is randomly sampled from a set of possible augmentations.
 The motivation behind this is to increase the diversity of the positive samples 
-in order to force the model to learn features invariant to translations.
+in order to drive the model to learn features invariant to translations 
+\citet{PIC_2020,swav_2020,local_aggr_2019,grape_2024,CL_temp_2021}.
 
 
 % clustering/ distance
-Another approach is to work on distances or similarities defined on embedding spaces.
+Since \ac{cl} objectives are often formulated in terms of distances or similarities between pairs of samples, 
+the idea of using clustering techniques is a natural choice.
+Intuitively, clusters of similar samples should be considered as positive samples and thus,
+should be encoded close to each other.
+Conversely, samples from different clusters should be encoded far apart.
+
+\textcolor{red}{TODO\\}
 Multiple methods have been proposed to generate samples via clustering.
 Some ideas focus on high intra-cluster similarities to improve the alignment of the embeddings \citet{DRC_2020}.
 Other ideas define different neighbour regions to condense representation within an inner radius 
