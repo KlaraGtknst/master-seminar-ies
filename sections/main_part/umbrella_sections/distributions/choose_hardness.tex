@@ -1,0 +1,12 @@
+\subsubsection{Choosing the hardness of negative samples}\label{subsec:choose_hardness}
+
+\citet{robinson_contrastive_2021} 
+extend \citet{chuang_debiased_2020}'s approach to sampling from distributions of image data.
+Again, sampling from the positive sample distribution is approximated by sampling from a set of transformations
+while negative samples $x^-$ are obtained by sampling from the data distribution $p(x)$.
+
+\citet{robinson_contrastive_2021} introduce the concentration parameter $\beta$ 
+to enable user-specific hardness of the negative samples.
+$\beta$ is a multiplicative factor for the similarity, i.e. inner product $\beta f(x)^\text{T}f(x^-)$, of two sample feature space representations.
+Hence, large values of $\beta$ lead to sampling very hard negative samples and thus, 
+increase the risk of sampling \acp{fn}.
