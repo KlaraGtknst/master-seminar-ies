@@ -1,8 +1,10 @@
 \subsection{Sample via clustering}
 \label{subsec:SampleViaClustering}
-% easy approaches
-% DRC (AF, AP & reg losses)
-\input{sections/main_part/umbrella_sections/clustering/deep_robust_clustering}  % TODO: weg?
+Since \ac{cl} objectives are often formulated in terms of distances or similarities between pairs of samples, 
+the idea of using clustering techniques is a natural choice.
+Intuitively, clusters of similar samples should be considered as positive samples and thus,
+should be encoded close to each other.
+Conversely, samples from different clusters should be encoded far apart.
 
 % SwAV
 \input{sections/main_part/umbrella_sections/clustering/swav}
