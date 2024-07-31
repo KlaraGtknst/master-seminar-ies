@@ -1,17 +1,37 @@
-\subsubsection{Mining on manifolds}\label{subsec:mining_manifolds} % cooler approach
+\subsubsection{Mining on manifolds}\label{subsec:mining_manifolds}
+
+
+% sparse usage of hard pairs inspired by SVMs
 
 % TODO: Wie findet man manifolds?
 
-\citet{mining_manifolds_2018} combines different definitions of proximity to mine 
+% purpose
+According to \citet{mining_manifolds_2018}, the initial representation of the data is obtained by e.g. a pre-trained \ac{cnn}.
+Hard pair mining is performed in order to re-train the network.
+
+% idea of positive and negative samples
+For re-training, a combination of different definitions of proximity induces mining 
 for hard positives and negatives as displayed in \autoref{fig:mining_manifolds_vis}.
-Given an anchor, the neighbours on the same manifold which are not neighbours in terms of 
+Given an anchor, the neighbors on the same manifold which are not neighbors in terms of 
 Euclidean proximity are considered positive samples.
 These positive samples should be embedded closer to the anchor in the Euclidean space.
-Negative samples, on the other hand, are neighbours in the Euclidean space, 
+Negative samples, on the other hand, are neighbors in Euclidean space, 
 but on different manifolds.
 These samples should be embedded further away from the anchor in the Euclidean space.
-The hard samples are mined from an unordered set of \textit{relevant} samples.
+%The hard samples are mined from an unordered set of \textit{relevant} samples.
 
+% different neighborhoods & hard samples
+The authors define the $k$ nearest Euclidean neighbour $NN^e_k$ and 
+the $k$ nearest manifold neighbour $NN^m_k$.
+The hard positives are defined as $NN^m_k \textbackslash NN^e_k$. 
+The pool $NN^m_k$ is ordered by descending manifold similarity to the anchor
+to ensure that high-confidence samples are chosen first.
+$k$ controls the visual diversity of the hard positives.
+The larger $k$ is, the more diverse, i.e. hard, the hard positives are. 
+The pool of hard negatives is defined as $NN^e_k \textbackslash NN^m_k$.
+$NN^e_k$ is ordered by descending Euclidean distance to the anchor to keep the hardest samples.
+
+% visualization of hard samples
 \begin{figure}[h]% h = here, t = top, b = bottom, p = page of floats
     \centering
     \subfloat[\centering Euclidean $k$ nearest neighbour $NN^e_k$ (orange).]
@@ -32,15 +52,85 @@ The hard samples are mined from an unordered set of \textit{relevant} samples.
     \label{fig:mining_manifolds_vis}%
 \end{figure}
 
-The authors define the $k$ nearest Euclidean neighbour $NN^e_k$ and 
-the $k$ nearest manifold neighbour $NN^m_k$.
-The hard positives are defined as $NN^m_k \textbackslash NN^e_k$. 
-The pool $NN^m_k$ is ordered by descending manifold similarity to the anchor
-to ensure that high-confidence samples are chosen first.
-$k$ controls the visual diversity of the hard positives.
-The larger $k$ is, the more diverse, i.e. hard, the hard positives are. 
-The pool of hard negatives is defined as $NN^e_k \textbackslash NN^m_k$.
-$NN^e_k$ is ordered by descending Euclidean distance to the anchor to keep the hardest samples.
+
+% manifolds via random walk n nearest neighbor graph
+\citet{mining_manifolds_2018} propose a method where the manifold is estimated by mode-seeking, i.e. a random walk process, 
+on the Euclidean nearest neighbor graph induced by the Euclidean similarity function $s_e$.
+The graph is undirected, weighted and represented by a sparse symmetric adjacency matrix.
+The adjacency matrix consists of the reciprocal $k$ nearest neighbors of each sample to reduce the negative impact of outliers \citet{diffusion_2017,mining_manifolds_2018,fast_2018}.
+The weighted adjacency matrix entries $a_{ij}$ defined in \eqref{eq:mining_manifolds_adjacency_matrix} from \citet{mining_manifolds_2018} 
+are calculated via the Euclidean distance between the samples if both nodes are in each other's nearest neighborhood.
+Diagonal entries are set to zero \citet{mining_manifolds_2018,fast_2018}.
+%They admit that assessing the manifold similarity poses additional computational and memory requirements.
+
+\begin{equation}
+    a_{ij} = \begin{cases}
+        s_e(y_i,y_j), & \text{if } y_i \in NN^e_k(y_j)\wedge y_j \in NN^e_k(y_i)\\
+        0, & \text{otherwise}\\
+      \end{cases}     
+    \label{eq:mining_manifolds_adjacency_matrix}
+\end{equation}
+
+
+% mode seeking
+% The manifold representation is obtained via mode-seeking as described in \citet{mode_seeking_2012}.
+% The nearest neighbor network consists of samples as nodes and is weighted by the Euclidean distance 
+% if both samples are in each other's $k$ nearest neighborhood \citet{mode_seeking_2012,mining_manifolds_2018}.
+
+% authority modes
+While traditional mode-seeking relies on metric features, such as distances, mode-seeking on graphs 
+uses the concept of random walks instead \citet{mode_seeking_2012}.
+A random walk, i.e. a linear combination of the identity matrix and a scaled version of the adjacency matrix, is simulated multiple times on the graph.
+\citet{mode_seeking_2012} define the so-called authority modes on a graph as the most frequently visited nodes among their local neighbors 
+by random walks on the graph.
+They correspond to the local maxima of the underlying probability distribution of random walks over the graph.
+
+% authority score
+Inspired by PageRank, the possibility of random jumps is included in order to ensure convergence to a stationary distribution 
+and consequently, the probability of visiting a node is denoted by the authority score $\pi$.
+The authority score $\pi$ is defined in \eqref{eq:authority_score} from \citet{mode_seeking_2012} 
+where $p(i,j)$ are the entries of the Markov transition matrix $P$.
+It takes into account the probability of visiting a node $j$ from a node $i$ and 
+the probability of a random jump to one of the nodes chosen uniformly at random.
+\citet{mode_seeking_2012} set $\alpha$ to $0.9$. 
+The authority score $\pi$ can be computed by, for instance, power method \citet{mode_seeking_2012,PageRank_2004}.
+
+\begin{equation}
+    \pi(j) = \alpha \sum_{i \in \mathcal{V}}^{}  \pi(i)p(i,j) + (1-\alpha)\frac{1}{N} , \text{ where } p(i,j) = \frac{w(i,j) }{\sum_{j \in \mathcal{V}}^{}w(i,j) } 
+    \label{eq:authority_score}
+\end{equation}
+
+% local neighbors on the manifold: node relevancy 
+\citet{mode_seeking_2012} define node relevancy $\Psi(s,t)$ via \eqref{eq:node_relevancy} where $d(s)$ denotes the out-degree of a node.
+To incorporate the reachability of a node, the probability of reaching node $t$ from node $s$ in $k$ steps $p_k(s,t)$ is 
+defined via the $k_{th}$ power of the Markov transition matrix $P$.
+To support similar authority scores between neighboring nodes, the exponential term including a weighting factor $\gamma$ is included.
+$\Psi(s,t)$ is not symmetric and depends on the random walk step $k$.
+The authors propose to use the node relevancy $\Psi(s,t)$ for a node $s$ to determine the manifold neighbors $N_\varepsilon^m(s)$ for $s$ via the usage of a threshold.
+
+\begin{equation}
+    \Psi(s,t) = d(s) p_k(s,t) \exp(-\gamma \left\{  \pi(t) - \pi(s)  \right\}^2)\text{, where } d(s) = \sum_{j\in \mathcal{V}}^{}w(s,j)
+    \label{eq:node_relevancy}
+\end{equation}
+
+% AAS
+They propose the \ac{aas} as a nonparametric estimator of the authority modes.
+A node $s$ is shifted to node $\mathcal{A}(s)$ calculated in \eqref{eq:authority_ascent_shift}. 
+This formula chooses the local neighbor $t$ of $s$ that maximizes the difference of the authority scores $\pi$.
+The authors argue that the \ac{aas} is finite and converges since the graph is finite.
+When \ac{aas} is completed, manifolds are represented as clusters.
+
+\begin{equation}
+    \mathcal{A}(s) = \underset{t \in \mathcal{N_\varepsilon}(s)}{\text{argmax}} \left\{ p_k(s,t)\left[ \pi(t)-\pi(s) \right] \right\}
+    \label{eq:authority_ascent_shift}
+\end{equation}
+
+% inlier and outlier
+% Inliers on the manifold reside in large clusters while outliers are isolated in small groups since they do not have enough relevancy with inliers \citet{mode_seeking_2012}.
+% Hence, outlier clusters can be identified by low sums of authority values.
+
+
+
 
 % selection of anchors
 \textcolor{red}{soll ich das ausführlicher beschreiben? Ja, <0.5 Seiten Formeln\\}
