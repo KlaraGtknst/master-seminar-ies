@@ -62,6 +62,7 @@ The weighted adjacency matrix entries $a_{ij}$ defined in \eqref{eq:mining_manif
 are calculated via the Euclidean distance between the samples if both nodes are in each other's nearest neighborhood.
 Diagonal entries are set to zero \citet{mining_manifolds_2018,fast_2018}.
 %They admit that assessing the manifold similarity poses additional computational and memory requirements.
+The manifold is computed once at the beginning \citet{mining_manifolds_2018}.
 
 \begin{equation}
     a_{ij} = \begin{cases}
@@ -84,6 +85,8 @@ A random walk, i.e. a linear combination of the identity matrix and a scaled ver
 \citet{mode_seeking_2012} define the so-called authority modes on a graph as the most frequently visited nodes among their local neighbors 
 by random walks on the graph.
 They correspond to the local maxima of the underlying probability distribution of random walks over the graph.
+% selection of anchors
+Since the anchors should be diverse and relevant, they are chosen to be the authority modes \citet{mining_manifolds_2018}.
 
 % authority score
 Inspired by PageRank, the possibility of random jumps is included in order to ensure convergence to a stationary distribution 
@@ -130,28 +133,21 @@ When \ac{aas} is completed, manifolds are represented as clusters.
 % Hence, outlier clusters can be identified by low sums of authority values.
 
 
-
-
-% selection of anchors
-\textcolor{red}{soll ich das ausführlicher beschreiben? Ja, <0.5 Seiten Formeln\\}
-The anchors are selected such that they are diverse and relevant 
-exploiting the structural properties of the data and the method.
-This process is described in more detail in \citet{mining_manifolds_2018}.
-
 % loss functions
-\textcolor{red}{soll ich das ausführlicher beschreiben? Ja\\}
 The authors propose multiple loss functions to train the model.
-They, for instance, apply the contrastive loss, the triplet loss, 
-and weighted versions of both contrastive and triplet loss.
+They, for instance, apply the contrastive loss $l_c(x^r, x^+, x^-)= \left\| x^r - x^+ \right\|^2 + \left[ m - \left\| x^r - x^- \right\| \right]^2$, 
+the triplet loss $l_t(x^r, x^+, x^-)= \left[ m +  \left\| x^r - x^+ \right\| ^2 - \left\| x^r - x^- \right\| \right]^2$, 
+and weighted versions of both contrastive and triplet loss, where the loss is multiplied by the manifold similarity of anchor and positive sample \citet{mining_manifolds_2018}.
+$m$ is a margin parameter and $x^r$ is the representation of the anchor.
 
 % examples
-\textcolor{red}{weg?\\}
+Resulting hard positives and negatives are displayed in \autoref{fig:manifold_mining_qualitative_analysis} and \autoref{fig:manifold_mining_examples}.
 
 % TODO: Wie positives generiert?
 \begin{figure}[h] % h = here, t = top, b = bottom, p = page of floats
     \centering
     \includegraphics[width=360pt]{images/mining_manifold_qualitative_analysis.png}
-    \caption{Illustration from \citet{mining_manifolds_2018}.
+    \caption{Illustration of CUB200-2011 from \citet{mining_manifolds_2018}.
     The anchor is denoted $x^r$.
     A selection of hard positives from $P^+(x^r)$ is compared to the 
     baseline approach by sampling from the closest neighbours to $x^r$ in 
@@ -160,20 +156,20 @@ and weighted versions of both contrastive and triplet loss.
     is compared to the baseline $X \textbackslash NN^e_3$, 
     i.e. sampling from the set that contains all samples but the three closest ones in 
     terms of Euclidean distance.
-    The borders of the images denote the ground-truth class.
+    The borders of the images denote the ground-truth class, i.e. if bird species is the same.
     Green borders mean that the image belongs to the same class as the anchor,
     whereas red denotes different class images.
-    It becomes apparent that the sampled hard positive consist of fewer false positives 
+    It becomes apparent that the sampled hard positives consist of fewer false positives 
     as the baseline.
     }
     \label{fig:manifold_mining_qualitative_analysis}
 \end{figure}
 
-% TODO: Wie positives generiert? Wie ist eine Klasse definiert?
 \begin{figure}[h] % h = here, t = top, b = bottom, p = page of floats
     \centering
     \includegraphics[width=360pt]{images/mining_manifold_examples.png}
-    \caption{Illustration from \citet{mining_manifolds_2018}.
+    \caption{Illustration Oxford5k and Paris6k images crawled from Flickr from \citet{mining_manifolds_2018}.
+    The dataset contains multiple images for each landmark building \citet{manifold_dataset}.
     The anchor is denoted $x^r$.
     A selection of hard positives from $P^+(x^r)$ is compared to the 
     baseline approach by sampling from the closest neighbours to $x^r$ in 
@@ -183,7 +179,7 @@ and weighted versions of both contrastive and triplet loss.
     i.e. sampling from the set that contains all samples but the three closest ones in 
     terms of Euclidean distance.
     It becomes apparent that the hard negatives display visually similar but 
-    semantically images to the anchor. % good
+    semantically different images to the anchor. % good
     }
     \label{fig:manifold_mining_examples}
 \end{figure}
