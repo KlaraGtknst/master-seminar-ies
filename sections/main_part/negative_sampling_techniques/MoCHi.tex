@@ -1,7 +1,5 @@
 \subsection{\acl{mochi}}\label{subsec:MoCHi}
 
-% TODO: Experimente zum s, s' Verhältnis
-
 \citet{mochi_2020} state that most approaches to sampling negatives rely on 
 time-consuming updates of a memory bank or big batches to achieve good performance.
 They propose \ac{mochi}, a method that computes samples online while claiming they introduce no computational overhead.
@@ -61,6 +59,15 @@ the absolute distance between representations with the same class label.
 Secondly, the uniformity loss is used to determine 
 the distribution of representations on the hyperphere.
 It is calculated via the logarithm of the average pairwise Gaussian potential between all embeddings.
+
+% s, s' effect
+\citet{mochi_2020} conducted experiments to investigate the effect of the parameters $s, s'$.
+They present metrics such as average percision and accuracy for different ratios of $s$ and $s'$ 
+for object detection and image segmentation tasks on COCO as well as 
+linear classification on ImageNet-1K and object detection on PASCAL VOC.
+Generally, the scores differ only in magnitudes of $1 \%$.
+Additionally, the authors state that for $s > 0, s' = 0$ the model learns faster but achieves similar performance to the baseline, i.e. the model without \ac{mochi}.
+
 
 % modifications
 The authors listed modifications to the approach proposed above that lead to inferior performance.
