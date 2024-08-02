@@ -17,8 +17,10 @@ The definition of \ac{mochi}($N, s, s'$) is as follows:
     \item $s'$: Number of samples to generate with approach 2.
 \end{enumerate}
 For both approaches to generating negative samples, the authors use the same memory bank $Q$.
-Given a fixed anchor, firstly, $Q$ is ordered in descending similarity to the anchor representation     % TODO: similarity measure
+Given a fixed anchor, firstly, $Q$ is ordered in descending similarity to the anchor representation    
 in the feature space producing $\tilde{Q}$.
+The similarity between $n_i \in \tilde{Q}$ and the query is calculated via 
+a scaled dot product of both samples.
 Secondly, all but the first, i.e. most similar, $N$ samples are discarded from $\tilde{Q}$.
 % first approach
 The first approach proposed by \citeauthor{mochi_2020}, chooses two random samples $n_i, n_j \in \tilde{Q}$ 

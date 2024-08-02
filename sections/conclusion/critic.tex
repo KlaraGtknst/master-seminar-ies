@@ -1,14 +1,13 @@
 \section{Critic}\label{sec:critic}
 
-% TODO: braucht man L_ap bei DRC überhaupt?
-
 \begin{enumerate}
     \item many papers, but often used just random transformations, which is boring -> kNN
     \item manifold mining is interesting
-    \item clustering-based approaches seemed to need $M$ clusterings per iteration 
+    \item clustering-based approaches eg. \ac{pcl} seemed to need $M$ clusterings per iteration 
     which seems computationally expensive. Batch verändert komplettes embedding/ model
     \item usage of cosine similarity is questionable, since vector direction is compared and 
     not the magnitude, right? YES
     \item distances on high dimensional spaces are not well defined, right? curse of dimensionality -> distances become meaningless -> dim reduction
+    \item braucht man $L_{ap}$ bei DRC überhaupt?
 \end{enumerate}
 

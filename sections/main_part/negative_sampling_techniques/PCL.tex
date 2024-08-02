@@ -1,8 +1,5 @@
 \subsubsection{\acl{pcl}}\label{subsec:PCL}
 
-% TODO: M clusters pro Iteration ist ganz schön teuer, oder? Wie oft update?
-% TODO: Momentum encoder, wie funktioniert das? smoothing/ averaging?
-
 \citet{PCL_2021} use clustering in the feature space to optimize the sample's representation.
 They assign multiple prototypes of different granularity to each sample.
 The prototypes are found by clustering.
@@ -26,10 +23,10 @@ The prototypes are latent variables.
     \label{fig:PCL_training}
 \end{figure}
 
-% E-step: define k clusters
+% E-step: define k clusters & momentum encoder
 $k$-means clustering is used to find the prototypes in the E-step.
 The clustering is performed on the sample's embeddings obtained from the momentum encoder, 
-which trails the main encoder with a higher momentum.
+whose parameters are a moving average of the main encoder's parameters and thus, smoother \citet{PCL_2021}.
 The prototypes are the cluster centroids.
 
 % M-step
