@@ -29,6 +29,20 @@ If the data is clustered as displayed in \autoref{fig:graph_svm}a,
 the sample pairs within a cluster that have the longest shortest path could be considered as hard positive samples.
 Conversely, sample pairs in different clusters with the shortest shortest path could be considered as hard negative samples.
 
+\begin{figure}[!htb]%
+    \centering
+    \subfloat[\centering Longest shortest path pairs within a cluster are considered hard positive pairs (green) 
+    while shortest path pairs of different clusters are considered hard negative (red).]
+    {{\includegraphics[width=5cm]{images/Cluster_samples.drawio.png} }}%
+    \qquad
+    \subfloat[\centering Visualization of the \ac{svm} approach. 
+    \acp{sv} are displayed as bold points.
+    Red arrows denote hard negative pairs while green arrows denote hard positive pairs.]
+    {{\includegraphics[width=5cm]{images/SVM_samples.png} }}%
+    \caption{Samples are displayed as points and their colour denotes their cluster membership.}%
+    \label{fig:graph_svm}%
+\end{figure}
+
 % SNA measures
 Even if the input data is not initially a graph, one could transform it into a graph via, for instance, 
 the Euclidean nearest neighbour graph discussed in \autoref{subsec:mining_manifolds}.
@@ -51,18 +65,19 @@ Similarly, distant samples from the decision boundary and their \acp{sv} are con
 Since \ac{svm} is a binary classifier, $k>2$ clusters would have to be handled via
 multiple one-vs-the-rest or one-vs-one approaches.
 
-\begin{figure}[h]%
+\begin{figure}[!htb]%
     \centering
-    \subfloat[\centering Longest shortest path pairs within a cluster are considered hard positive pairs (green) 
-    while shortest path pairs of different clusters are considered hard negative (red).]
-    {{\includegraphics[width=5cm]{images/Cluster_samples.drawio.png} }}%
+    \subfloat[\centering Visualization of the \fisher{} approach.
+    To facilitate visualization, the projection of the samples is only implied by dotted lines but not displayed.
+    Overlapping projected samples (bold circles) of different clusters are considered hard negative pairs.]
+    {{\includegraphics[width=6cm]{images/Fishers_linear_discriminat_samples.drawio.png} }}%
     \qquad
-    \subfloat[\centering Visualization of the \ac{svm} approach. 
-    \acp{sv} are displayed as bold points.
-    Red arrows denote hard negative pairs while green arrows denote hard positive pairs.]
-    {{\includegraphics[width=5cm]{images/SVM_samples.png} }}%
+    \subfloat[\centering Display of the \ac{pca} idea.
+    The first two \ac{pca} axes of each cluster are displayed as lines.
+    Green arrows denote positive pairs while red arrows denote negative pairs.]
+    {{\includegraphics[width=4cm]{images/PCA_samples.png} }}%
     \caption{Samples are displayed as points and their colour denotes their cluster membership.}%
-    \label{fig:graph_svm}%
+    \label{fig:fisher_pca}%
 \end{figure}
 
 % Fisher's linear discriminant: overlapping samples
@@ -87,24 +102,9 @@ An alternative approach could be to use cosine similarity between vectors spanni
 rather than the dot product of two samples, 
 because the magnitude of the axes is not of interest but only their direction.
 
-\begin{figure}[h]%
-    \centering
-    \subfloat[\centering Visualization of the \fisher{} approach.
-    To facilitate visualization, the projection of the samples is only implied by dotted lines but not displayed.
-    Overlapping projected samples (bold circles) of different clusters are considered hard negative pairs.]
-    {{\includegraphics[width=5cm]{images/Fishers_linear_discriminat_samples.png} }}%
-    \qquad
-    \subfloat[\centering Display of the \ac{pca} idea.
-    The first two \ac{pca} axes of each cluster are displayed as lines.
-    Green arrows denote positive pairs while red arrows denote negative pairs.]
-    {{\includegraphics[width=5cm]{images/PCA_samples.png} }}%
-    \caption{Samples are displayed as points and their colour denotes their cluster membership.}%
-    \label{fig:fisher_pca}%
-\end{figure}
-
 % curriculum learning: different sample generation techniques
 Moreover, the concept of curricular weighting proposed in \autoref{subsec:curricular_weighting} could be extended.
-The notion of hard negative samples being samples in the batch which are more similar to the anchor than positive samples 
+The notion of hard negative samples being samples in the batch that are more similar to the anchor than positive samples 
 proposed in \citet{curricular_weighting_2024} is only one version to generate hard negative samples.
 Using other sample generation techniques discussed in this work in combination with 
 the idea of gradually increasing the level of hardness during training could be beneficial.
