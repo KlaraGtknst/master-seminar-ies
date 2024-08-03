@@ -1,15 +1,17 @@
 \section{Critic}\label{sec:critic}
 
-Even though the presented sampling techniques are promising, after gathering and evaluating the information, 
-some critical points arise.
+Even though the presented sampling techniques are very promising, after gathering and evaluating the information, 
+some critical points arise which will be discussed in the following.
 
 % positive augmentations
 Many scientists have led their paper with the statement that the generation of positive samples has already been subject to many studies.
-However, the majority of the papers subject to this work used random transformations to generate positive samples.
-The effort spent on initially identifying the best augmentation strategy for positive samples is undeniable, 
-but the amount of thought spent on positive sample generation in these papers seems to be rather shallow.
-If one considers an explainable approach to sample generation, 
-the usage of more cluster-based sample generation seems to be a more promising approach than stating that a augmentation sampled randomly 
+However, the majority of the papers subject to this work used random transformations to generate positive samples \citet{robinson_contrastive_2021,adversarial_2020,swav_2020}.
+The effort spent on initially identifying the best augmentation strategies for positive samples is undeniable, 
+but the thought spent on positive sample generation in these papers seems to be rather shallow.
+
+% explainable sample generation
+In terms of explainability, 
+the usage of cluster-based sample generation techniques seems to be a more promising approach than stating that an augmentation sampled randomly 
 from a set of transformations was used without further motivation or detail.
 
 % manifold mining
@@ -22,28 +24,30 @@ the manifold structure could change during the training process of the embedding
 Therefore, recalculation of the manifold could be of interest.
 
 % clustering-based approaches
-Some clustering-based approaches such as \ac{pcl} seem to need $M$ clusterings per iteration 
+Some clustering-based approaches such as \ac{pcl} \citet{PCL_2021} seem to need $M$ clusterings per iteration 
 which seems computationally expensive. 
 However, since a batch of samples changes the embedding, recalculation of the clusters is necessary.
-Nevertheless, the computational costs of this approach can be subject to discussion of its overall usability.
+Nevertheless, the computational costs of this approach should be considered when evaluating \ac{pcl}'s overall usability.
 
 % cosine similarity
 Even though most papers use the dot product to calculate the similarity between samples, 
 \citet{mining_potential_2024} use cosine similarity.
-The cosine similarity is a measure of the angle between two vectors and not the magnitude.
+The cosine similarity is a measure of the angle between two vectors and does not consider the magnitude.
 Hence, using cosine similarity to calculate the similarity between samples seems questionable.
 
 % high dimensional spaces
 The curse of dimensionality states that in high-dimensional spaces, distances become meaningless.
 Consequently, cluster-based approaches in high-dimensional spaces might not be as effective as in lower-dimensional spaces.
-Since dimensionality reduction always leads to information loss, one has to consider this drawback when using clustering-based approaches.
-If one does not want to lose information contained in the original high-dimensional data, 
-approaches such as \ac{mochi} seem more promising.
+Since dimensionality reduction always leads to information loss, one has to consider this drawback when using clustering-based approaches 
+such as \ac{drc} \citet{DRC_2020}, \ac{swav} \citet{swav_2020}, \ac{pcl} \citet{PCL_2021}, 
+local aggregation \citet{local_aggr_2019} or mining manifolds \citet{mining_manifolds_2018}.
+To avoid information loss, i.e. working on the original high-dimensional data, 
+the usage of approaches such as \ac{mochi} \citet{mochi_2020} seem beneficial.
 
 % DRC & L_{ap}
 The clustering-based approach \ac{drc} \citet{DRC_2020} was briefly discussed in \autoref{subsec:SampleViaClustering}.
 \ac{drc} aims to address the issue of existing methods enforcing the representations of samples 
 and their augmentations to be assigned to the same cluster regardless of their \ac{af}.
 Hence, they consider both the \ac{af} and the \ac{ap} during clustering.
-Since the \ac{ap} arises from via usage of a softmax function \ac{af}, 
-it seems questionable whether the usage of \ac{ap} in the loss is necessary.
+Since the \ac{ap} is calculated via the softmax function of the \ac{af}, 
+it is debatable whether the usage of \ac{ap} in the loss is necessary.

@@ -2,35 +2,36 @@
 
 % clustering algos
 The majority of clustering-based techniques use algorithms such as $k$-means to generate clusters.
-TODO: cluster form
-However, algorithms such as \ac{dbscan} could be promising alternatives.
+$k$-means' implicit assumptions include that clusters are spherical, isotropic and have roughly the same numbers of samples. % = fester Radius
+To loosen these assumptions, other clustering algorithms could be used.
+For instance, \ac{dbscan} could be a promising alternative depending on the underlying data.
 According to \citet{local_aggr_2019}, \ac{dbscan} scales well to large datasets.
 Moreover, it is not necessary to specify the number of clusters $k$ beforehand and 
 it is able to detect clusters of arbitrary shapes.
 However, \citeauthor{local_aggr_2019} claim that \ac{dbscan} performs poorly on 
 high-dimensional data or highly variable density functions.
-Anyhow, using other clustering algorithms in existing techniques 
-could produce promising results since new cluster shapes may arise.
-Even a combination of different clustering algorithms for methods such as 
+
+A combination of different clustering algorithms for methods such as 
 Local Aggregation \citet{local_aggr_2019} or \ac{pcl} \citet{PCL_2021} could be beneficial.
-Since Local Aggregation uses different $k$ values for $k$-means clustering to generate hierarchical clusters of different granularity, 
+Since Local Aggregation uses $m$ different $k_m$ values for $k$-means clusterings 
+to generate hierarchical clusters of different granularity, 
 this diversity could be increased by using different clustering algorithms to introduce different cluster shapes.
 
 % AE instead of CNN
-Since most techniques discussed in this work have image input data a \acp{cnn} to generate embeddings seems to be natural choice.
+Since most techniques discussed in this work have image input data \acp{cnn} seem to be a natural choice for generating embeddings.
 However, using \acp{ae} to generate embeddings could be a promising alternative.
-Since \acp{ae} are trained on a reconstruction error of the input, no additional data is necessary.
+Since \acp{ae} are trained using the reconstruction error of the input and output, no additional data is necessary.
 This idea is purely speculative and has not been tested yet.
 
 % SNA measures
 Even if the input data is not initially a graph, one could transform it into a graph via, for instance, 
 clustering algorithms or the Euclidean nearest neighbor graph discussed in \autoref{subsec:mining_manifolds}.
-Sample pairs within a cluster with the longest shortest path could be considered as hard positive samples.
+The sample pairs within a cluster that have the longest shortest path could be considered as hard positive samples.
 Conversely, sample pairs in different clusters with the shortest shortest path could be considered as hard negative samples.
 
 In computer science, \ac{sna} is a well-known field.
 \ac{sna} scientists have developed many measures to analyze graphs.
-Another idea is to use the concept of cliques.
+Therefore, another idea is to use the concept of cliques.
 A clique is a subset of vertices of an undirected graph such that every two distinct vertices in the clique are adjacent.
 Vertices in a clique are easy positives and reachable vertices outside the clique are hard positives.
 This idea would consider the clique vertices to be interchangeable.
@@ -39,7 +40,7 @@ This idea would consider the clique vertices to be interchangeable.
 Another idea is to use \acp{svm} to generate negative samples.
 Initially, the data is split into two classes. 
 Since true class labels are not available in \ac{cl}, clustering results are used as a proxy.
-Then, an \ac{svm} is trained on the data.
+Then, a \ac{svm} is trained on the data.
 After training, the decision boundary is determined such that the margin is maximal.
 The samples that are closest to the decision boundary are considered as \acp{sv}.
 Each pair of \acp{sv} from different sides of the decision boundary is considered a (hard) negative pair.
@@ -48,7 +49,7 @@ Since \ac{svm} is a binary classifier, $k>2$ clusters would have to be handled v
 multiple one-vs-the-rest or one-vs-one approaches.
 
 % Fisher's linear discriminant: overlapping samples
-Another idea is to use Fisher's linear discriminant to generate hard negative samples.
+It might be possible to use Fisher's linear discriminant to generate hard negative samples.
 Fisher's linear discriminant is a linear projection that maximizes the distance between the means of the classes.
 Again, two classes are determined via clustering.
 The projected samples of different classes which are closest to each other are considered as negative samples.
@@ -57,18 +58,22 @@ The projected samples of different classes which are closest to each other are c
 Since \ac{pca} is a linear transformation, that maximizes the variance of projected data, 
 it is the best linear dimension reduction technique in terms of minimization of information loss.
 Again, multiple classes are determined via clustering.
-Each cluster is projected onto the first $n$ \ac{pca} axes.
-Since these axes explain the most variance, equidistant samples of these axes of different \ac{pca} projections 
-are considered negative samples.
-An alternative approach could be to use cosine similarity between different \ac{pca} axes, 
-because the magnitude of the axes is not of interest but its direction.
+The first $n$ \ac{pca} axes are determined for each cluster.
+% axes points as samples
+Since these axes explain the most variance, equidistant samples lying on these axes could be used as generated samples.
+Pairs of projections and their generated axes samples are considered positive samples while 
+pairs of projections and samples from different axes are considered negative samples.
+% cosine similarity
+An alternative approach could be to use cosine similarity between vectors spanning \ac{pca} axes of different clusters 
+rather than the dot product of two samples, 
+because the magnitude of the axes is not of interest but only their direction.
 
 % curriculum learning: different sample generation techniques
-The concept of curricular weighting proposed in \autoref{subsec:curricular_weighting} could be extended.
-The notion of hard negative samples being different samples in the batch which are more similar to the anchor than positive samples 
+Moreover, the concept of curricular weighting proposed in \autoref{subsec:curricular_weighting} could be extended.
+The notion of hard negative samples being samples in the batch which are more similar to the anchor than positive samples 
 proposed in \citet{curricular_weighting_2024} is only one version to generate hard negative samples.
 Using other sample generation techniques discussed in this work in combination with 
-the idea of gradually increasing the level of hardness could be beneficial.
+the idea of gradually increasing the level of hardness during training could be beneficial.
 
 % drawbacks of ideas: initial clustering
 The main drawback of the ideas presented in this section is the initial clustering.
