@@ -19,12 +19,13 @@ Furthermore, the authors introduce a $\mathcal{L}_2$ regularization term to miti
     \label{fig:curriculum_learning_samples}
 \end{figure}
 
-This approach considers samples from the same batch that are harder to distinguish from the anchor 
-than its positive sample obtained by an augmentation, hard negatives.
+% This approach considers samples from the same batch that are harder to distinguish from the anchor 
+% than its positive sample obtained by an augmentation, hard negatives.
 Firstly, the embeddings are $\mathcal{L}_2$ normalized.
 Secondly, the similarity between the anchor and the other samples in the batch is calculated via the dot product.
-The similarity of the positive pair is denoted as $s_{ii'}$ and the similarity of the negative pair as $s_{ij}$.
-If the similarity of the negative pair is bigger than the similarity of the positive pair, 
+The similarity of the positive pair is denoted $s_{ii'}$ while the similarity of the negative pair is designated $s_{ij}$.
+If the similarity of a negative pair is bigger than the similarity of the positive pair, 
+i.e. $s_{ij} > s_{ii'}$, the negative pair is considered a hard negative and 
 the weight of the negative sample is multiplied by a factor $w_{ij}$ 
 as illustrated in \eqref{eq:curricular_negative_weighting}.
 
@@ -34,9 +35,9 @@ as illustrated in \eqref{eq:curricular_negative_weighting}.
     \label{eq:curricular_negative_weighting}
 \end{equation}
 
-$w_{ij}$ is governed by the negative pair's similarity $s_{ij}$ to emphasising hard negatives 
+$w_{ij}$ is governed by the negative pair's similarity $s_{ij}$ emphasising hard negatives 
 and the parameter $t$ which is adapted during training.
-At the beginning of the training process, $t$ is set close to zero and $w_{ij} < 1$ 
+At the beginning of the training process, $t$ is set close to zero and thus, $w_{ij} < 1$ 
 to assign smaller relative weights to hard negatives.
 As the training progresses, $t$ is increased to assign higher weights $w_{ij} > 1$ to hard negatives.
 
@@ -74,10 +75,10 @@ Since this average similarity is expected to increase over time, so will $t$ \ci
 
 \citeauthor{curricular_weighting_2024} stress that in order to avoid losing the semantic structure of the embedding space 
 due to highly weighted \acp{fn}, weights $w_{ij} > 1$ are $\mathcal{L}_2$ regularized.
-They compare the model's accuracy with and without the proposed regularization approach on both the CIFAR-10 and the STL-10 datasets 
-to support the usage of regularization.
+The comparison of the model's accuracy with and without the proposed regularization approach on both the CIFAR-10 and the STL-10 datasets 
+support the usage of regularization \citet{curricular_weighting_2024}.
 
 % ablation study
 Moreover, the authors conduct an ablation study to investigate the impact of the proposed weighting scheme 
-by comparing it to fixed small and high $t$ values, as well as fixed transitions of $t$ values during training accuracy to cosine functions.
+by comparing it to fixed small and high $t$ values, as well as fixed transitions of $t$ values during training according to cosine functions.
 The proposed adaptive weighting scheme outperforms the fixed weighting schemes.
