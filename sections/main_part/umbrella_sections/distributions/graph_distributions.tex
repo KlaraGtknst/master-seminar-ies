@@ -3,13 +3,13 @@
 Another prominent data structure is graphs, which can model 
 for instance social networks, citation networks, or knowledge graphs.
 \citet{progcl_2022} propose an approach to mine negative samples for \ac{cl} on graphs called \progcl{}. 
-As a motivation, the authors compare the similarity between the anchor and true negative samples 
+As a motivation, the authors compare the similarity between the anchor and \acp{tn} 
 to the similarity between the anchor and \acp{fn} 
 across multiple datasets for both conventional \ac{cl} and \ac{gcl}.
 The resulting distributions shown in \autoref{fig:sim_t_f_neg_image_graph} 
-indicate that for \ac{gcl} most highly similar negative samples are \acp{fn}, 
-while for \ac{cl} there is not a clear trend for \ac{cl}.
-Moreover, the authors found that both the \ac{tn} and \ac{fn} distributions are modeled best by a \ac{bmm} 
+indicate that for \ac{gcl} the majority of highly similar negative samples are \acp{fn}, 
+while for conventional \ac{cl} there seems to be no clear trend.
+Moreover, the authors found that both the \ac{tn} and \ac{fn} distributions are best modeled by a \ac{bmm} 
 since it is able to fit the skewed empirical distribution.
 The distribution is fitted using the \ac{em} algorithm on a subset of samples for a reduction of computational costs.
 
@@ -26,9 +26,9 @@ The distribution is fitted using the \ac{em} algorithm on a subset of samples fo
 \end{figure}
 
 % scheme 1: ProGCL-weight
-Based on this observation, the first approach the authors propose is 
-considering a combination of the probability of a sample being a \ac{tn} 
-with the sample's similarity to the anchor, i.e. its hardness, during the selection process of negative samples.
+Based on this observation, the authors propose 
+considering both the probability of a sample being a \ac{tn} 
+and the sample's similarity to the anchor, i.e. its hardness, during the selection process of negative samples.
 
 % scheme 2: ProGCL-mix (MoCHi)
 % \textcolor{red}{move to MoCHi chapter\\}

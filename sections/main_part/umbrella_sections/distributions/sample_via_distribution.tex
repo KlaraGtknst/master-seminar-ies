@@ -3,12 +3,20 @@
 \label{subsec:SampleViaDistribution}
 
 % Intuition
-Assuming the distribution of a variable $x$ is known, it is possible to sample from it.
+Assuming the distribution $p$ of a variable $x$ is known, it is possible to sample from it.
 Sampling can either be done directly or 
 via approximation schemes such as rejection sampling and Monte Carlo sampling \citet{robinson_contrastive_2021}.
 However, in the context of \ac{cl}, the true data distribution of the different classes is often not available 
 due to the nature of unsupervised learning scenarios.
 Therefore, some scientists formulate assumptions or simplify the problem.
+
+% mathematical foundation
+%Positive pairs ($x$, $x^+$) are considered to originate from the same class.
+Let $\rho(c), c \in \mathcal{C}$ be the distribution over the latent classes and 
+let $h: \mathcal{X} \rightarrow \mathcal{C}$ be the ground truth assigning class labels $c \in \mathcal{C}$ to inputs $x \in \mathcal{X}$.
+Hence, $x \sim x'$ if $h(x) = h(x')$ \citet{robinson_contrastive_2021,chuang_debiased_2020}.
+Presuming that $x^- \sim q$ and the anchor $x$ %that $\rho(c)$ is uniformly distributed, and
+is drawn from the data distribution $p$.
 
 % PU learning
 \input{sections/main_part/umbrella_sections/distributions/debiasing}

@@ -71,11 +71,15 @@
 
 \section{Sampling techniques}\label{sec:sampling_techniques}
 
-Since positive pairs ($x$, $x^+$) are considered to originate from the same class, we denote $\rho(c), c \in \mathcal{C}$ as the distribution over the latent classes.
-Moreover, let $h: \mathcal{X} \rightarrow \mathcal{C}$ be the ground truth assigning class labels $c \in \mathcal{C}$ to inputs $x \in \mathcal{X}$.
-Hence, $x \sim x'$ if $h(x) = h(x')$ \citet{robinson_contrastive_2021,chuang_debiased_2020}.
-Assuming that $\rho(c)$ is uniformly distributed, and that $x^- \sim q = p$ where the anchor $x$ 
-is drawn from the data distribution $p$.
+The following sections present different sampling techniques for 
+positive and negative samples in \ac{cl}.
+Firstly, sampling strategies based on distributions are discussed.
+Secondly, clustering-based sampling techniques are presented and 
+the impact of temperature on the sampling process is discussed.
+Then, a technique relying on a memory bank is introduced.
+Finally, curricular weighting is discussed. 
+The latter is a technique that is not directly of interest in terms of sample generation 
+but in terms of sample selection during training.
 
 % distributions
 \input{sections/main_part/umbrella_sections/distributions/sample_via_distribution}
