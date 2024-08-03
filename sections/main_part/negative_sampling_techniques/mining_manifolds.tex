@@ -11,9 +11,9 @@ Hard pair mining is performed in order to re-train the network.
 For re-training, a combination of different definitions of proximity induces mining 
 for hard positives and negatives as displayed in \autoref{fig:mining_manifolds_vis}.
 Given an anchor, the neighbors on the same manifold which are not neighbors in terms of 
-Euclidean proximity are considered positive samples.
+Euclidean proximity are considered hard positive samples.
 These positive samples should be embedded closer to the anchor in the Euclidean space.
-Negative samples, on the other hand, are neighbors in Euclidean space, 
+Hard negative samples, on the other hand, are neighbors in Euclidean space, 
 but on different manifolds.
 These samples should be embedded further away from the anchor in the Euclidean space.
 %The hard samples are mined from an unordered set of \textit{relevant} samples.
@@ -24,7 +24,7 @@ the $k$ nearest manifold neighbour $NN^m_k$.
 The hard positives are defined as $NN^m_k \textbackslash NN^e_k$. 
 The pool $NN^m_k$ is ordered by descending manifold similarity to the anchor
 to ensure that high-confidence samples are chosen first.
-$k$ controls the visual diversity of the hard positives.
+$k$ controls the diversity of the hard positives.
 The larger $k$ is, the more diverse, i.e. hard, the hard positives are. 
 The pool of hard negatives is defined as $NN^e_k \textbackslash NN^m_k$.
 $NN^e_k$ is ordered by descending Euclidean distance to the anchor to keep the hardest samples.
@@ -32,10 +32,10 @@ $NN^e_k$ is ordered by descending Euclidean distance to the anchor to keep the h
 % visualization of hard samples
 \begin{figure}[h]% h = here, t = top, b = bottom, p = page of floats
     \centering
-    \subfloat[\centering Euclidean $k$ nearest neighbour $NN^e_k$ (orange).]
+    \subfloat[\centering $k$ nearest Euclidean neighbour $NN^e_k$ (orange).]
     {{\includegraphics[width=5cm]{images/euclidean_NN.png} }}%
     \qquad
-    \subfloat[\centering Manifold $k$ nearest neighbour $NN^m_k$ (purple).]
+    \subfloat[\centering $k$ nearest manifold neighbour $NN^m_k$ (purple).]
     {{\includegraphics[width=5cm]{images/manifold_NN.png} }}%
     \qquad
     \subfloat[\centering Hard positives $NN^m_k \textbackslash NN^e_k$(green).]
@@ -80,24 +80,24 @@ The manifold is computed once at the beginning \citet{mining_manifolds_2018}.
 While traditional mode-seeking relies on metric features, such as distances, mode-seeking on graphs 
 uses the concept of random walks instead \citet{mode_seeking_2012}.
 A random walk, i.e. a linear combination of the identity matrix and a scaled version of the adjacency matrix, is simulated multiple times on the graph.
-\citet{mode_seeking_2012} define the so-called authority modes on a graph as the most frequently visited nodes among their local neighbors 
-by random walks on the graph.
+\citet{mode_seeking_2012} define the so-called authority modes on a graph 
+as the most frequently visited nodes by random walks among their local neighbors.
 They correspond to the local maxima of the underlying probability distribution of random walks over the graph.
 % selection of anchors
 Since the anchors should be diverse and relevant, they are chosen to be the authority modes \citet{mining_manifolds_2018}.
 
 % authority score
-Inspired by PageRank, the possibility of random jumps is included in order to ensure convergence to a stationary distribution 
-and consequently, the probability of visiting a node is denoted by the authority score $\pi$.
-The authority score $\pi$ is defined in \eqref{eq:authority_score} from \citet{mode_seeking_2012} 
+Inspired by PageRank, the possibility of random jumps is included in order to ensure convergence to a stationary distribution. 
+The probability of visiting a node is denoted by the authority score $\pi$ 
+which is defined in \eqref{eq:authority_score} from \citet{mode_seeking_2012} 
 where $p(i,j)$ are the entries of the Markov transition matrix $P$.
-It takes into account the probability of visiting a node $j$ from a node $i$ and 
+$\pi$ takes into account the probability of visiting a node $j$ from a node $i$ and 
 the probability of a random jump to one of the nodes chosen uniformly at random.
 \citet{mode_seeking_2012} set $\alpha$ to $0.9$. 
 The authority score $\pi$ can be computed by, for instance, power method \citet{mode_seeking_2012,PageRank_2004}.
 
 \begin{equation}
-    \pi(j) = \alpha \sum_{i \in \mathcal{V}}^{}  \pi(i)p(i,j) + (1-\alpha)\frac{1}{N} , \text{ where } p(i,j) = \frac{w(i,j) }{\sum_{j \in \mathcal{V}}^{}w(i,j) } 
+    \pi(j) = \alpha \sum_{i \in \mathcal{V}}^{}  \pi(i)p(i,j) + (1-\alpha)\frac{1}{N} , \text{ where } p(i,j) = \frac{a_{ij} }{\sum_{k \in \mathcal{V}}^{}a_{ik} } 
     \label{eq:authority_score}
 \end{equation}
 
@@ -107,10 +107,12 @@ To incorporate the reachability of a node, the probability of reaching node $t$ 
 defined via the $k_{th}$ power of the Markov transition matrix $P$.
 To support similar authority scores between neighboring nodes, the exponential term including a weighting factor $\gamma$ is included.
 $\Psi(s,t)$ is not symmetric and depends on the random walk step $k$.
-The authors propose to use the node relevancy $\Psi(s,t)$ for a node $s$ to determine the manifold neighbors $N_\varepsilon^m(s)$ for $s$ via the usage of a threshold.
+The authors propose to use the node relevancy $\Psi(s,t)$ for a node $s$ to determine the manifold neighbors $N_\varepsilon^m(s)$ for $s$ 
+via the usage of a threshold $\varepsilon$: 
+$N_\varepsilon^m(s) =  \left\{ t \in \mathcal{V} | \Psi(s,t) > \varepsilon \right\} \cup \left\{ s \right\}$ \citet{mode_seeking_2012}.
 
 \begin{equation}
-    \Psi(s,t) = d(s) p_k(s,t) \exp(-\gamma \left\{  \pi(t) - \pi(s)  \right\}^2)\text{, where } d(s) = \sum_{j\in \mathcal{V}}^{}w(s,j)
+    \Psi(s,t) = d(s) p_k(s,t) \exp(-\gamma \left\{  \pi(t) - \pi(s)  \right\}^2)\text{, where } d(s) = \sum_{j\in \mathcal{V}}^{}a_{sj}
     \label{eq:node_relevancy}
 \end{equation}
 
