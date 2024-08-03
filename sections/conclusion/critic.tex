@@ -1,13 +1,49 @@
 \section{Critic}\label{sec:critic}
 
-\begin{enumerate}
-    \item many papers, but often used just random transformations, which is boring -> kNN
-    \item manifold mining is interesting, but manifold calculated only once at beginning
-    \item clustering-based approaches eg. \ac{pcl} seemed to need $M$ clusterings per iteration 
-    which seems computationally expensive. Batch verändert komplettes embedding/ model
-    \item usage of cosine similarity is questionable, since vector direction is compared and 
-    not the magnitude, right? YES
-    \item distances on high dimensional spaces are not well defined, right? curse of dimensionality -> distances become meaningless -> dim reduction
-    \item braucht man $L_{ap}$ bei DRC überhaupt?
-\end{enumerate}
+Even though the presented sampling techniques are promising, after gathering and evaluating the information, 
+some critical points arise.
 
+% positive augmentations
+Many scientists have led their paper with the statement that the generation of positive samples has already been subject to many studies.
+However, the majority of the papers subject to this work used random transformations to generate positive samples.
+The effort spent on initially identifying the best augmentation strategy for positive samples is undeniable, 
+but the amount of thought spent on positive sample generation in these papers seems to be rather shallow.
+If one considers an explainable approach to sample generation, 
+the usage of more cluster-based sample generation seems to be a more promising approach than stating that a augmentation sampled randomly 
+from a set of transformations was used without further motivation or detail.
+
+% manifold mining
+\citet{mining_manifolds_2018}'s manifold mining approach, on the other hand, poses an interesting and more graspable approach to sample generation. 
+However, according to the paper, the manifold is calculated only once at the beginning of the training process.
+This is possible either due to the assumption that the manifold does not change during the training process or 
+due to computational costs.
+Since the manifold is calculated based on the Euclidean nearest neighbor graph which is dependent on the embedding, 
+the manifold structure could change during the training process of the embedding function.
+Therefore, recalculation of the manifold could be of interest.
+
+% clustering-based approaches
+Some clustering-based approaches such as \ac{pcl} seem to need $M$ clusterings per iteration 
+which seems computationally expensive. 
+However, since a batch of samples changes the embedding, recalculation of the clusters is necessary.
+Nevertheless, the computational costs of this approach can be subject to discussion of its overall usability.
+
+% cosine similarity
+Even though most papers use the dot product to calculate the similarity between samples, 
+\citet{mining_potential_2024} use cosine similarity.
+The cosine similarity is a measure of the angle between two vectors and not the magnitude.
+Hence, using cosine similarity to calculate the similarity between samples seems questionable.
+
+% high dimensional spaces
+The curse of dimensionality states that in high-dimensional spaces, distances become meaningless.
+Consequently, cluster-based approaches in high-dimensional spaces might not be as effective as in lower-dimensional spaces.
+Since dimensionality reduction always leads to information loss, one has to consider this drawback when using clustering-based approaches.
+If one does not want to lose information contained in the original high-dimensional data, 
+approaches such as \ac{mochi} seem more promising.
+
+% DRC & L_{ap}
+The clustering-based approach \ac{drc} \citet{DRC_2020} was briefly discussed in \autoref{subsec:SampleViaClustering}.
+\ac{drc} aims to address the issue of existing methods enforcing the representations of samples 
+and their augmentations to be assigned to the same cluster regardless of their \ac{af}.
+Hence, they consider both the \ac{af} and the \ac{ap} during clustering.
+Since the \ac{ap} arises from via usage of a softmax function \ac{af}, 
+it seems questionable whether the usage of \ac{ap} in the loss is necessary.
