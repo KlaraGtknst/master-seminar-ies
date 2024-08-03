@@ -46,8 +46,11 @@
 \maketitle         
 %
 % include: speed bonus, no reloads, but no nesting, forces page break after and before input
+
+% ---- Abstract ----
 \input{sections/introduction/abstract}
 
+% ---- Introduction ----
 \section{Introduction}\label{sec:introduction}
 
 \input{sections/introduction/SSL}
@@ -56,10 +59,8 @@
 
 \input{sections/introduction/motivation}
 
-% main part
 
-
-
+% ---- main part ---- 
 \input{sections/main_part/positive_samples}
 
 \input{sections/main_part/negative_samples}
@@ -81,40 +82,19 @@ but in terms of sample selection during training.
 % distributions
 \input{sections/main_part/umbrella_sections/distributions/sample_via_distribution}
 
-%\input{sections/main_part/negative_sampling_techniques/robinson_hard_negatives}
-
-%\input{sections/main_part/negative_sampling_techniques/debiased_CL} % weg
-
-%\input{sections/main_part/negative_sampling_techniques/ProGCL} % improves MoCHi
-
-
 % clustering/ distance
 \input{sections/main_part/umbrella_sections/clustering/sample_via_clustering}
 
 \input{sections/main_part/temperature_impact} % info for eg. PCL
 
-
-
-
-%\input{sections/main_part/negative_sampling_techniques/SwAV}    % weg
-
-
 % memory bank
 \input{sections/main_part/negative_sampling_techniques/MoCHi}
-
 
 % others
 \input{sections/main_part/negative_sampling_techniques/curricular_weighting}
 
 
-% weg
-%\input{sections/main_part/negative_sampling_techniques/CLAE}    % adversarial with augmentations
-%\input{sections/main_part/negative_sampling_techniques/PIC} % data scheduler
-% \input{sections/main_part/negative_sampling_techniques/mining_potential} % do not use: architecture complex and paper wordings not clear
-% \input{sections/main_part/negative_sampling_techniques/DRC} % usage of augmentations for positive samples, otherwise no information
-% \input{sections/main_part/umbrella_sections/clustering/swav} % SwAV: no interesting sample techniques (augmentations)
-
-% end
+% ---- end section ---- 
 \input{sections/conclusion/critic}
 
 \input{sections/conclusion/own_ideas}
@@ -123,12 +103,10 @@ but in terms of sample selection during training.
 
 
 % ---- Bibliography ----
-
-% \bibliographystyle{splncs04}
 \bibliographystyle{unsrtnat}
 \bibliography{references}
 
-
+% ---- Acronyms ----
 \section*{General acronyms}
 \input{general_acronyms}
 
