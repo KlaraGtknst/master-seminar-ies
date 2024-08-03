@@ -3,13 +3,12 @@ Simple selection techniques of negative samples include uniform sampling from th
 However, this approach is prone to two issues \citet{robinson_contrastive_2021,mining_potential_2024}:
 \begin{enumerate}
     \item Selected samples are not necessarily hard negatives since the approach does not consider the embedding space proximity.
-    \item Selected samples might actually belong to the same class and thus, can be denoted \ac{fn}.
+    \item Selected samples might actually belong to the same class as the anchor and thus, can be denoted \ac{fn}.
 \end{enumerate}
 
 % oracle learning
 Some approaches use a so-called class oracle to boost the performance of the model.
-Usually, \acp{fn} \cite{grape_2024,curricular_weighting_2024,progcl_2022}, i.e. samples considered negative that belong to the latent class of the anchor,
- can be sampled during hard negative mining. 
-Hence, samples of the same class are pushed further apart in the embedding space. 
+If \acp{fn} \cite{grape_2024,curricular_weighting_2024,progcl_2022}, i.e. samples considered negative that belong to the latent class of the anchor,
+ are sampled during hard negative mining samples of the same class are pushed further apart in the embedding space. 
 To avoid performance deterioration, this approach removes the \acp{fn} from the set of negative samples and thus, 
 increases the performance of the model \citet{mochi_2020}.
