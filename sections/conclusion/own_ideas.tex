@@ -1,4 +1,5 @@
 \section{Own ideas}\label{sec:own_ideas}
+\newcommand{\fisher}{Fisher's linear discriminant}
 
 % clustering algos
 The majority of clustering-based techniques use algorithms such as $k$-means to generate clusters.
@@ -23,12 +24,14 @@ However, using \acp{ae} to generate embeddings could be a promising alternative.
 Since \acp{ae} are trained using the reconstruction error of the input and output, no additional data is necessary.
 This idea is purely speculative and has not been tested yet.
 
-% SNA measures
-Even if the input data is not initially a graph, one could transform it into a graph via, for instance, 
-clustering algorithms or the Euclidean nearest neighbour graph discussed in \autoref{subsec:mining_manifolds}.
-The sample pairs within a cluster that have the longest shortest path could be considered as hard positive samples.
+% shortest path in graph
+If the data is clustered as displayed in \autoref{fig:graph_svm}a,
+the sample pairs within a cluster that have the longest shortest path could be considered as hard positive samples.
 Conversely, sample pairs in different clusters with the shortest shortest path could be considered as hard negative samples.
 
+% SNA measures
+Even if the input data is not initially a graph, one could transform it into a graph via, for instance, 
+the Euclidean nearest neighbour graph discussed in \autoref{subsec:mining_manifolds}.
 In computer science, \ac{sna} is a well-known field.
 \ac{sna} scientists have developed many measures to analyze graphs.
 Therefore, another idea is to use the concept of cliques.
@@ -37,7 +40,7 @@ Vertices in a clique are easy positives and reachable vertices outside the cliqu
 This idea would consider the clique vertices to be interchangeable.
 
 % SVM: SV as negative samples
-Another idea is to use \acp{svm} to generate negative samples.
+Another idea is to use \acp{svm} to generate hard samples as visualized in \autoref{fig:graph_svm}b.
 Initially, the data is split into two classes. 
 Since true class labels are not available in \ac{cl}, clustering results are used as a proxy.
 Then, a \ac{svm} is trained on the data.
@@ -48,11 +51,26 @@ Similarly, distant samples from the decision boundary and their \acp{sv} are con
 Since \ac{svm} is a binary classifier, $k>2$ clusters would have to be handled via
 multiple one-vs-the-rest or one-vs-one approaches.
 
+\begin{figure}[h]%
+    \centering
+    \subfloat[\centering Longest shortest path pairs within a cluster are considered hard positive pairs (green) 
+    while shortest path pairs of different clusters are considered hard negative (red).]
+    {{\includegraphics[width=5cm]{images/Cluster_samples.drawio.png} }}%
+    \qquad
+    \subfloat[\centering Visualization of the \ac{svm} approach. 
+    \acp{sv} are displayed as bold points.
+    Red arrows denote hard negative pairs while green arrows denote hard positive pairs.]
+    {{\includegraphics[width=5cm]{images/SVM_samples.png} }}%
+    \caption{Samples are displayed as points and their colour denotes their cluster membership.}%
+    \label{fig:graph_svm}%
+\end{figure}
+
 % Fisher's linear discriminant: overlapping samples
-It might be possible to use Fisher's linear discriminant to generate hard negative samples.
-Fisher's linear discriminant is a linear projection that maximizes the distance between the means of the classes.
+It might be possible to use \fisher{} to generate hard negative samples.
+\fisher{} is a linear projection that maximizes the distance between the means of the classes.
 Again, two classes are determined via clustering.
-The projected samples of different classes which are closest to each other are considered as negative samples.
+As visualized in \autoref{fig:fisher_pca}a, the projected samples of different classes that 
+are closest to each other are considered negative samples.
 
 % different PCA axes as negative samples
 Since \ac{pca} is a linear transformation, that maximizes the variance of projected data, 
@@ -63,10 +81,26 @@ The first $n$ \ac{pca} axes are determined for each cluster.
 Since these axes explain the most variance, equidistant samples lying on these axes could be used as generated samples.
 Pairs of projections and their generated axes samples are considered positive samples while 
 pairs of projections and samples from different axes are considered negative samples.
+This idea is visualized in \autoref{fig:fisher_pca}b.
 % cosine similarity
 An alternative approach could be to use cosine similarity between vectors spanning \ac{pca} axes of different clusters 
 rather than the dot product of two samples, 
 because the magnitude of the axes is not of interest but only their direction.
+
+\begin{figure}[h]%
+    \centering
+    \subfloat[\centering Visualization of the \fisher{} approach.
+    To facilitate visualization, the projection of the samples is only implied by dotted lines but not displayed.
+    Overlapping projected samples (bold circles) of different clusters are considered hard negative pairs.]
+    {{\includegraphics[width=5cm]{images/Fishers_linear_discriminat_samples.png} }}%
+    \qquad
+    \subfloat[\centering Display of the \ac{pca} idea.
+    The first two \ac{pca} axes of each cluster are displayed as lines.
+    Green arrows denote positive pairs while red arrows denote negative pairs.]
+    {{\includegraphics[width=5cm]{images/PCA_samples.png} }}%
+    \caption{Samples are displayed as points and their colour denotes their cluster membership.}%
+    \label{fig:fisher_pca}%
+\end{figure}
 
 % curriculum learning: different sample generation techniques
 Moreover, the concept of curricular weighting proposed in \autoref{subsec:curricular_weighting} could be extended.
