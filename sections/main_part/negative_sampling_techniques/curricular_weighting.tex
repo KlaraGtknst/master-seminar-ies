@@ -7,7 +7,7 @@ as displayed in \autoref{fig:curriculum_learning_samples}.
 Therefore, the weight of hard negative samples is increased over time according to the model performance.
 Furthermore, the authors introduce a $\mathcal{L}_2$ regularization term to mitigate the influence of \acp{fn}.
 
-\begin{figure}[h] % h = here, t = top, b = bottom, p = page of floats
+\begin{figure}[!htb] % h = here, t = top, b = bottom, p = page of floats
     \centering
     \includegraphics[width=360pt]{images/curriculum_learning_samples.png}
     \caption{Selection of negative samples for different stages of the training process 
@@ -53,7 +53,7 @@ with respect to the loss for different values of $t$ by \eqref{eq:curricular_wei
 the authors show that the model gradually focuses on hard negatives.
 The resulting plot is depicted in \autoref{fig:gradient_ratio_hard_neg_pos}.
 
-\begin{figure}[h] % h = here, t = top, b = bottom, p = page of floats
+\begin{figure}[!htb] % h = here, t = top, b = bottom, p = page of floats
     \centering
     \includegraphics[width=120pt]{images/ratio_hard_neg_pos_gradients.png}
     \caption{Display of the gradient ratio of hard negative and positive samples (orange) throughout training 
