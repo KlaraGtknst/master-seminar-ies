@@ -2,11 +2,11 @@
 
 \citet{mochi_2020} state that most approaches to sampling negatives rely on 
 time-consuming updates of a memory bank or big batches to achieve good performance.
-They propose \ac{mochi}, a method that computes samples online while claiming they introduce no computational overhead.
+They propose \ac{mochi}, a method that computes samples online claiming without any computational overhead.
 
 % memory bank
 They use a memory bank $Q$ of size $| Q | = K$ to store negative samples.
-There are different ways to choose $K$ by either saving the whole dataset, a queue of last batches,
+There are different ways to choose $K$ by either saving the whole dataset, a queue of the last batches,
 or all images in the current batch.
 
 % definition of MoCHi
@@ -19,7 +19,7 @@ The definition of \ac{mochi}($N, s, s'$) is as follows:
 For both approaches to generating negative samples, the authors use the same memory bank $Q$.
 Given a fixed anchor, firstly, $Q$ is ordered in descending similarity to the anchor representation    
 in the feature space producing $\tilde{Q}$.
-The similarity between $n_i \in \tilde{Q}$ and the query is calculated via 
+The similarity between $n_j \in \tilde{Q}$ and the query $q$ is calculated via 
 a scaled dot product of both samples.
 Secondly, all but the first, i.e. most similar, $N$ samples are discarded from $\tilde{Q}$.
 % first approach
@@ -49,7 +49,7 @@ This approach is considered to produce even harder negative samples than the fir
 % update of memory bank
 Using \eqref{eq:mochi_appr1} and \eqref{eq:mochi_appr2}, 
 $s$ and $s'$ hard negative samples are generated respectively.
-Afterwards, the similarity of the generated sample $h_k$ (or $h_k'$ respectively) 
+Afterward, the similarity of each generated sample $h_k$ (or $h_k'$ respectively) 
 to the anchor $q$ is calculated via $\frac{q^T h_k}{\tau}$.
 This similarity is used to update the memory bank $\tilde{Q}$ 
 by inserting the new sample.
@@ -64,7 +64,7 @@ It is calculated via the logarithm of the average pairwise Gaussian potential be
 
 % s, s' effect
 \citet{mochi_2020} conducted experiments to investigate the effect of the parameters $s, s'$.
-They present metrics such as average percision and accuracy for different ratios of $s$ and $s'$ 
+They present metrics such as average precision and accuracy for different ratios of $s$ and $s'$ 
 for object detection and image segmentation tasks on COCO as well as 
 linear classification on ImageNet-1K and object detection on PASCAL VOC.
 Generally, the scores differ only in magnitudes of $1 \%$.
@@ -72,7 +72,7 @@ Additionally, the authors state that for $s > 0, s' = 0$ the model learns faster
 
 
 % modifications
-The authors listed modifications to the approach proposed above that lead to inferior performance.
+The authors listed modifications to \ac{mochi} that lead to inferior performance.
 They tried to define the mixing coefficient via the similarity of the hard negative samples 
 to the anchor. % how negative the sample is 
 Moreover, they introduced non-uniformity when sampling $n_i, n_j$ from $\tilde{Q}$ by defining a 
