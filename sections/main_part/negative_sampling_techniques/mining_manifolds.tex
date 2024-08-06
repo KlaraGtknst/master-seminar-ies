@@ -55,7 +55,8 @@ $NN^e_k$ is ordered by descending Euclidean distance to the anchor to keep the h
 \citet{mining_manifolds_2018} propose a method where the manifold is estimated by mode-seeking, i.e. a random walk process, 
 on the Euclidean nearest neighbour graph induced by the Euclidean similarity function $s_e$.
 The graph is undirected, weighted and represented by a sparse symmetric adjacency matrix.
-The adjacency matrix consists of the reciprocal $k$ nearest neighbours of each sample to reduce the negative impact of outliers \citet{diffusion_2017,mining_manifolds_2018,fast_2018}.
+The adjacency matrix consists of the reciprocal $k$ nearest neighbours of each sample. 
+To reduce the negative impact of outliers, only reciprocal nearest neighbours are incorporated \citet{diffusion_2017,mining_manifolds_2018,fast_2018}.
 The weighted adjacency matrix entries $a_{ij}$ defined in \eqref{eq:mining_manifolds_adjacency_matrix} from \citet{mining_manifolds_2018} 
 are calculated via the Euclidean distance between the samples if both nodes are in each other's nearest neighbourhood.
 Diagonal entries are set to zero \citet{mining_manifolds_2018,fast_2018}.
@@ -91,10 +92,10 @@ Inspired by PageRank, the possibility of random jumps is included in order to en
 The probability of visiting a node is denoted by the authority score $\pi$ 
 which is defined in \eqref{eq:authority_score} from \citet{mode_seeking_2012} 
 where $p(i,j)$ are the entries of the Markov transition matrix $P$.
-$\pi$ takes into account the probability of visiting a node $j$ from a node $i$ and 
-the probability of a random jump to one of the nodes chosen uniformly at random.
+$\pi(j)$ takes into account the probability of visiting a node $j$ from a node $i$ and 
+the probability of a random jump from one of the nodes chosen uniformly at random.
 \citet{mode_seeking_2012} set $\alpha$ to $0.9$. 
-The authority score $\pi$ can be computed by, for instance, power method \citet{mode_seeking_2012,PageRank_2004}.
+The authority score $\pi$ can be computed by, for instance, the power method \citet{mode_seeking_2012,PageRank_2004}.
 
 \begin{equation}
     \pi(j) = \alpha \sum_{i \in \mathcal{V}}^{}  \pi(i)p(i,j) + (1-\alpha)\frac{1}{N} , \text{ where } p(i,j) = \frac{a_{ij} }{\sum_{k \in \mathcal{V}}^{}a_{ik} } 

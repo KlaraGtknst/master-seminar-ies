@@ -2,22 +2,25 @@
 \label{subsec:SampleViaClustering}
 
 The choice of clustering methods to optimize \ac{cl} objectives 
-arises naturally from the fact that positive pairs ought to be close to each other in the embedding space 
+arises naturally from the fact that positive pairs ought to be close 
+to each other in the embedding space 
 while samples of negative pairs ought to repel each other.
-Intuitively, clusters of similar samples should be considered as positive samples.
-Conversely, samples from different clusters should be encoded far apart.
+Intuitively, clusters of similar samples are considered positive samples.
+Conversely, samples from different clusters are denoted negative samples.
 
 Simple approaches, including \ac{drc} \citet{DRC_2020}, aim to create low intra-class diversity clusterings 
 by considering both the \ac{af}, obtained from a \ac{cnn} with a fully connected layer, 
-and the \ac{ap}, obtained from the softmax function, during clustering via a dedicated loss function.
+and the \ac{ap}, calculated via the softmax function of the \ac{af}, 
+during clustering using a dedicated loss function.
 This approach is motivated by their claim that existing methods cluster dissimilar \ac{af} together,
 due to the usage of the maximum sensitivity of the softmax function used during cluster assignment.
 
-Opposed to methods such as \ac{drc}, \ac{swav} does not directly encourage similar embeddings but similar 
+Opposed to methods such as \ac{drc}, \ac{swav} does not directly encourage similar embeddings 
+but similar 
 cluster assignments for positive pairs \citet{swav_2020}.
-The idea is to swap the assignments between two views of the same image to encourage 
+The idea is to swap the assignments between two positive samples of the same image to encourage 
 similar cluster assignments for similar instances.
-The positive sample is obtained by applying a random augmentation to the anchor.
+A positive sample is obtained by applying a random augmentation to the anchor.
 
 % interesting approaches
 % Local Aggregation

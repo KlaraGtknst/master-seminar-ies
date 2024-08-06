@@ -40,9 +40,9 @@ Some ideas focus on high intra-cluster similarities to improve the alignment of 
 Other ideas define different neighbour regions to condense representation within an inner radius 
 while repelling samples from an outer radius \citet{local_aggr_2019}.
 Another approach is to consider both Euclidean distance and semantic similarity to generate hard samples \citet{mining_manifolds_2018}.
-The \ac{pcl} technique defines positive samples as cluster centroids 
+Moreover, the \ac{pcl} technique defines positive samples as cluster centroids 
 from one of the multiple clusterings for different numbers of clusters 
-to encoder the hierarchical structure of the data \citet{PCL_2021}.
+to encode the hierarchical structure of the data \citet{PCL_2021}.
 
 
 % memory bank
@@ -50,7 +50,8 @@ Another prominent concept is the usage of memory banks to store embeddings of th
 \citeauthor{mochi_2020} fill these memory banks with embeddings of negative samples 
 and propose two approaches for generating new hard negatives: 
 Two of the most difficult samples currently stored in the memory bank are randomly selected and mixed.
-The second approach is to use only one of the existing negative samples and mix it with the anchor as a new sample.
+The second approach is to use only one of the existing negative samples and 
+mix it with the anchor to create a new sample.
 
 \citet{progcl_2022} propose a method that extends the idea of \citet{mochi_2020} by weighting randomly selected negative samples 
 with their relative similarity to the anchor when mixing them to create more difficult negative samples.
@@ -72,7 +73,7 @@ Since most approaches use a temperature parameter to control the hardness of the
 \citet{CL_temp_2021} and \citet{grape_2024} investigate the impact of the temperature on the performance of the model.
 They find that the \ac{cl} loss function optimizes hard samples by penalizing them according to their hardness.
 If the temperature is small, only the closest points are penalized and others are not.
-This can result in a uniform distribution of the embedding space.
+This can result in a uniformly distributed embedding space.
 
 % curriculum learning
 \citet{curricular_weighting_2024} propose a curriculum learning approach to generate hard negative samples.
