@@ -44,7 +44,7 @@ but also considering its prototypes $c^m_s$.
 To improve the stability of the results, $M$ clusterings with different numbers of clusters $k_m$ are 
 executed.
 Different numbers of clusters lead to different granularity of the prototypes 
-and a hierarchical structure being encoded into the loss function.
+and thus, a hierarchical structure is encoded into the loss function.
 
 \begin{equation}
     \mathcal{L}_{InfoNCE}= - \sum_{i=1}^{N}\log\frac{\exp \frac{z_i\cdot z_i'}{\tau}}{\sum_{j=0}^{r}\exp \frac{z_i\cdot z_j'}{\tau}}
