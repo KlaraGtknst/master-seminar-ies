@@ -9,13 +9,13 @@ However, when $\tau$ is too small, the embedding spaces' semantic structure dete
 For $\tau \rightarrow \infty$, the loss function's hardness-aware property disappears and hard negatives are not penalized anymore.
 
 
-% TODO: meaning of axis for (a)
 \begin{figure}%
     \centering
-    \subfloat[\centering For small values of $\tau$, similar samples, i.e. x-axis values close to $1.0$, receive high penalties.
+    \subfloat[\centering Penality (y-axis) depending on similarity of samples (x-axis). 
+    For small values of $\tau$, similar samples, i.e. x-axis values close to $1.0$, receive high penalties.
     If $\tau$ is too small, only the closest one or two points are penalized and thus, the performance deteriorates.
     As $\tau \rightarrow 1$, the magnitude of the penalty is similar for all negative samples.]
-    {{\includegraphics[width=6cm]{images/gradient_ratio_dep_on_temperature.png} }}%
+    {{\includegraphics[width=6.7cm]{images/gradient_ratio_dep_on_temperature.png} }}%
     \qquad
     \subfloat[\centering Visualization of embedding space for different $\tau$.
     Small values of $\tau$ lead to a more uniform distribution of the embedding space, 
