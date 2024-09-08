@@ -18,6 +18,8 @@
 
 \usepackage{subfig}
 
+\usepackage{multirow}
+
 
 \newcommand{\topic}{Approaches for finding sample pairs in contrastive learning}
 \newcommand{\authorA}{Klara M. Gutekunst}
@@ -63,7 +65,6 @@
 \input{sections/introduction/motivation}
 
 % ---- main part ---- 
-% TODO: introductory table with overview of methods, authors, kind of method etc
 \input{sections/main_part/positive_samples}
 
 \input{sections/main_part/negative_samples}
@@ -74,7 +75,7 @@
 \section{Sampling techniques}\label{sec:sampling_techniques}
 
 The following sections present different sampling techniques for 
-positive and negative samples in \ac{cl}.
+positive and negative samples in \ac{cl} as displayed in \autoref{tab:overview}.
 Firstly, sampling strategies based on distributions are discussed.
 Secondly, clustering-based sampling techniques are presented and 
 the impact of temperature on the sampling process is discussed.
@@ -82,6 +83,28 @@ Then, a technique relying on a memory bank is introduced.
 Finally, curricular weighting is discussed. 
 The latter is a technique that is not directly of interest in terms of sample generation 
 but in terms of sample selection during training.
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table}[]
+    \caption{Overview of \acs{cl} techniques}
+    \label{tab:overview}
+    \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Category}                                   & \textbf{Name}                             & \textbf{Authors} \\ \hline
+    \multicolumn{1}{|c|}{\multirow{3}{*}{Distribution}} & \acs{pu} approximation                          & \citet{chuang_debiased_2020}                \\ \cline{2-3} 
+    \multicolumn{1}{|c|}{}                              & Choosing the hardness of negative samples     & \citet{robinson_contrastive_2021}                \\ \cline{2-3} 
+    \multicolumn{1}{|c|}{}                              & ProGCL (Graphs)                               & \citet{progcl_2022}                \\ \hline
+    \multirow{5}{*}{Clustering}                         & \acs{drc}                                       & \citet{DRC_2020}                \\ \cline{2-3} 
+                                                        & \acs{swav}                                      & \citet{swav_2020}                \\ \cline{2-3} 
+                                                        & \acs{la}                                       & \citet{local_aggr_2019}                \\ \cline{2-3} 
+                                                        & Mining on manifolds                           & \citet{mining_manifolds_2018}                \\ \cline{2-3} 
+                                                        & Prototypical Contrastive Learning             & \citet{PCL_2021}               \\ \hline
+    \multirow{2}{*}{Mixing}                             & \acs{mochi}                                     & \citet{mochi_2020}                \\ \cline{2-3} 
+                                                        & Extension of \acs{mochi}                        & \citet{progcl_2022}                \\ \hline
+    Others                                              & Curriculum Weighting                          & \citet{curricular_weighting_2024}               \\ \hline
+    \end{tabular}
+    \end{table}
 
 % distributions
 \input{sections/main_part/umbrella_sections/distributions/sample_via_distribution}
