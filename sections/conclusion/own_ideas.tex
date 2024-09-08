@@ -101,9 +101,8 @@ Pairs of projections and their generated axes samples are considered positive sa
 pairs of projections and samples from different axes are considered negative samples.
 This idea is visualized in \autoref{fig:fisher_pca}b.
 % cosine similarity
-% TODO: deutlicher, dass ein PCA pro cluster
 An alternative approach could be to use cosine similarity between vectors spanning \ac{pca} axes of different clusters 
-rather than the dot product of two samples, 
+rather than the dot product of two samples belonging to different clusters, 
 because the magnitude of the axes is not of interest but only their direction.
 
 % curriculum learning: different sample generation techniques
@@ -125,4 +124,8 @@ In order to extend the ideas to multi-class problems, one-vs-one or one-vs-all a
 These extensions are prone to ambiguities during inference and 
 come with additional computational effort.
 
-% TODO: end is too abrupt
+% end
+The exploration of various \ac{cl} techniques has demonstrated their effectiveness in \ac{ssl}, 
+particularly in producing high-performing models trained on unlabeled data. 
+Despite the promising results, challenges remain, such as optimizing the selection of negative and positive samples 
+and improving computational efficiency.
