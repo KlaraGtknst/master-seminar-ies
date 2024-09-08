@@ -14,9 +14,10 @@ high-dimensional data or highly variable density functions.
 
 A combination of different clustering algorithms for methods such as 
 \ac{la} \citet{local_aggr_2019} or \ac{pcl} \citet{PCL_2021} could be beneficial.
-Since \ac{la} uses $m$ different $k_m$ values for $k$-means clusterings 
-to generate hierarchical clusters of different granularity, 
-this diversity could be increased by using different clustering algorithms to introduce different cluster shapes.
+Since \ac{la} employs $m$ different $k_m$ values for $k$-means clustering to create hierarchical clusters 
+of varying granularity, 
+the diversity could be further enhanced by incorporating different clustering algorithms 
+to introduce a variety of cluster shapes.
 
 % AE instead of CNN
 % CNNs and Autoencoders are not mutaly exclusive: CNN = architecture, VAE = Framework, can be implemented using CNNs
@@ -84,7 +85,7 @@ Similarly, distant samples from the decision boundary and their \acp{sv} are con
 \end{figure}
 
 % Fisher's linear discriminant: overlapping samples
-It might be possible to use \fisher{} to generate hard negative samples.
+It may be possible to use \fisher{} to generate hard negative samples.
 \fisher{} is a linear projection that maximizes the distance between the means of the classes.
 Again, two classes are determined via clustering.
 As visualized in \autoref{fig:fisher_pca}a, the projected samples of different classes that 
@@ -97,8 +98,8 @@ Again, multiple classes are determined via clustering.
 The first $n$ \ac{pca} axes are determined for each cluster.
 % axes points as samples
 Since these axes explain the most variance, equidistant samples lying on these axes could be used as generated samples.
-Pairs of projections and their generated axes samples are considered positive samples while 
-pairs of projections and samples from different axes are considered negative samples.
+Projected samples and their corresponding generated axis samples are treated as positive samples, 
+while projected samples and axes samples from other clusters are considered negative samples.
 This idea is visualized in \autoref{fig:fisher_pca}b.
 % cosine similarity
 An alternative approach could be to use cosine similarity between vectors spanning \ac{pca} axes of different clusters 
