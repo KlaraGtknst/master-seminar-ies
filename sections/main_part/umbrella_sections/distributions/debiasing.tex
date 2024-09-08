@@ -9,13 +9,13 @@ the positive distribution $p^+$ is mimicked by data augmentations.
 They denote sampling bias the phenomenon of sampling \acp{fn} as illustrated in \autoref{fig:sampling_bias}a.
 When randomly sampling negative samples from the data distribution $p(x)$ 
 a negative sample can inherently belong to the same latent class as the anchor.
-The negative effect of sampling bias on the model's performance is illustrated in \autoref{fig:sampling_bias}b.
+The negative effect of sampling bias on the model's performance is illustrated in \autoref{fig:sampling_bias}b. % intuition
 Consequently, they propose a debiased contrastive objective that corrects for sampling \acp{fn} 
 %i.e., the selection of negative samples that have the same label as the anchor, 
 in an unsupervised scenario.
 The idea is to generate positive samples using augmentations,
 to sample negative samples $x^-$ from the data distribution $p(x)$
-and to add a correction term for \acp{fn} in the loss function. % TODO: why/ intuition
+and to add a correction term for \acp{fn} in the loss function. 
 
 \begin{figure}%
     \centering
