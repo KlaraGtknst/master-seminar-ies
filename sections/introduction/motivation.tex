@@ -6,6 +6,7 @@ where $\theta$ are the parameters of the \ac{nn}.
 The effect of the distance between the anchor $x$ and the positive $x^+$ (negative $x^-$) 
 sample on the loss is visualized in \autoref{fig:hard_easy_samples_dist_effect_loss}.
 Since difficult samples hold more (gradient) information, they have a higher loss value.
+% TODO: intuition why
 Hence, close negative pairs ($x$, $x^-$) are considered hard \citet{robinson_contrastive_2021}, 
 while distant positive pairs ($x$, $x^+$) are considered hard.
 
@@ -18,6 +19,7 @@ while distant positive pairs ($x$, $x^+$) are considered hard.
 %     \label{fig:hard_easy_samples_dist_effect_loss}
 % \end{figure}
 
+% TODO: label axis and explain what axis means
 \begin{figure}[!htb] % h = here, t = top, b = bottom, p = page of floats
     \centering
     \includegraphics[width=280pt]{images/Hard_easy_samples_dist_effect_loss_desmos.png}
