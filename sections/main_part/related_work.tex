@@ -1,21 +1,20 @@
 \section{Related Work}\label{sec:related_work}
 
 % sampling from distributions
-Naturally, when using descriptive statistics to describe data, (empirical estimated) distributions play a crucial role.
 Some researchers obtain their positive and negative samples from distributions.
 Unfortunately, since \ac{cl} is a form of unsupervised learning, 
 the true data distribution of the different classes is often not available.
 Therefore, some scientists formulate assumptions or simplify the problem.
 Possible assumptions include that the data distribution is uniform,
-or approximating the positive sample distribution by sampling from a set of transformations 
-or using the overall data distribution as a proxy for the negative sample distribution \citet{chuang_debiased_2020,robinson_contrastive_2021}.
+or the approximation of the positive sample distribution by sampling from a set of transformations 
+or the usage of the overall data distribution as a proxy for the negative sample distribution \citet{chuang_debiased_2020,robinson_contrastive_2021}.
 In other cases, the class distributions are approximated using \acp{bmm} \citet{progcl_2022}.
 
 Given the assumption that the data distribution is sufficiently well approximated, 
 it is possible to consider probabilities of samples being \acp{fn} during the selection process of samples.
 Needless to say, the goal is to avoid sampling \acp{fn} as negative samples.
 To this end, scientists have proposed different strategies, which mostly boil down to 
-incorporating the possibility of a potential negative sample being a \ac{fn} or \ac{tn} 
+incorporating the possibility of a potential negative sample being a \ac{fn} or \ac{tn} % TODO: difference to above unclear
 \citet{chuang_debiased_2020,robinson_contrastive_2021,progcl_2022}.
 
 
@@ -31,26 +30,31 @@ encouraging the model to learn features that are invariant to translations
 % clustering/ distance
 Since \ac{cl} objectives are often formulated in terms of distances or similarities between pairs of samples, 
 the idea of using clustering techniques is a natural choice.
+% TODO: wrong way around: closely embedded samples form clusters
 Intuitively, clusters of similar samples should be considered as positive samples and thus,
 should be encoded close to each other.
 Conversely, samples from different clusters should be encoded far apart.
 
-Multiple methods have been proposed to generate samples via clustering.
+Multiple methods have been proposed to find sample pairs via clustering.
 Some ideas focus on high intra-cluster similarities to improve the alignment of the embeddings \citet{DRC_2020}.
 Other ideas define different neighbour regions to condense representation within an inner radius 
 while repelling samples from an outer radius \citet{local_aggr_2019}.
+% TODO: how is semantic similariyt measured?
 Another approach is to consider both Euclidean distance and semantic similarity to generate hard samples \citet{mining_manifolds_2018}.
 Moreover, the \ac{pcl} technique defines positive samples as cluster centroids 
+% TODO: too vague
 from one of the multiple clusterings for different numbers of clusters 
 to encode the hierarchical structure of the data \citet{PCL_2021}.
 
 
 % memory bank
-Another prominent concept is the usage of memory banks to store embeddings of the data.
+Another prominent concept is the usage of memory banks to store embeddings of the selected samples.
 \citet{mochi_2020} fill these memory banks with embeddings of negative samples 
 and propose two approaches for generating new hard negatives: 
+% TODO: define difficult samples & mixing
 Two of the most difficult samples currently stored in the memory bank are randomly selected and mixed.
 The second approach is to use only one of the existing negative samples and 
+% TODO: define anchor
 mix it with the anchor to create a new sample.
 
 \citet{progcl_2022} propose a method that extends the idea of \citet{mochi_2020} by weighting randomly selected negative samples 
