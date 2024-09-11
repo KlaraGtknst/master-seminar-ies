@@ -1,7 +1,16 @@
+% SSL
+\acf{ssl} is an unsupervised learning technique that allows training models on data without any labels.
+This is achieved through the use of pre-text tasks designed to create labels from the unlabelled dataset.
+% pre-text task
 Researchers usually select self-supervised pre-text tasks such that 
 the labels can be generated without human annotations \citet{PIC_2020}.
-The pre-text task instance discrimination considers each instance from the dataset its class.
-A sample and its augmentations are considered positive pairs, 
-while all other samples are considered negative pairs.
-Hence, the model acquires an understanding of distinguishing between the instances and 
-learns invariance to (image) transformations \citet{PIC_2020,swav_2020,local_aggr_2019,grape_2024,CL_temp_2021}.
+% instance recognition
+One such pre-text task, instance discrimination, treats each instance in the dataset as a distinct class.
+% positive and negative samples
+In a scenario where a dataset consists of multiple inherent (unlabelled) classes, 
+instances from the same class are considered positive pairs, 
+while instances from different classes are treated as negative pairs.
+% goal
+Consequently, the model learns to differentiate between instances and 
+develops robustness to (image) transformations
+\citet{PIC_2020,swav_2020,local_aggr_2019,grape_2024,CL_temp_2021}.
