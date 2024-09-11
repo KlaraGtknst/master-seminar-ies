@@ -1,14 +1,26 @@
 \begin{abstract}
     %The abstract should briefly summarize the contents of the paper in
     %150--250 words.
-
+    % unsupervised learning
     Unsupervised learning techniques are of interest to many researchers, as they allow training models on data without any labels.
+    % SSL
     \acl{ssl} is a subset of unsupervised learning, where labels are generated from unlabelled training data.
-    \acl{cl} is a \acl{ssl} technique that is frequently used in representation learning.
-    The representations of similar samples are supposed to be encoded within close range of each other, 
+    % CL
+    One application of \acl{ssl} is \acl{cl}, which is a technique that is frequently applied in representation learning.
+    % representation learning
+    In this context, the representations of similar samples are supposed to be encoded within close range of each other, 
     while the representations of dissimilar samples are pushed apart.
-    The selection of these dis-/similar pairs is subject to research.
+    % instance recognition
+    To this end, pre-text tasks such as instance recognition are used: 
+    Each sample is considered its own class and other samples or transformations of the sample are classified in a binary manner as dis-/similar.
+    % dis-/similar pairs
+    \acl{cl} is used to train the model on pairs of similar and dissimilar samples.
+    The selection of these dis-/similar pairs is of particular interest 
+    since difficult pairs cause great learning opportunities for the model. 
+    While transformations of a sample, i.e. the so-called anchor, are considered similar, 
+    the selection of dissimilar pairs is more challenging.
+    % this paper
     This paper reviews different approaches for finding sample pairs in \acl{cl}, with a focus on hard sample mining.
     
     \keywords{\acl{cl}  \and \acl{ssl} \and Hard sample mining.}
-    \end{abstract}
+\end{abstract}
