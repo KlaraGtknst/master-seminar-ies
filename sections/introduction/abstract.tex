@@ -2,25 +2,26 @@
     %The abstract should briefly summarize the contents of the paper in
     %150--250 words.
     % unsupervised learning
-    Unsupervised learning techniques are of interest to many researchers, as they allow training models on data without any labels.
+    Since labeled data is often scarce and expensive to obtain, 
+    unsupervised learning has emerged as a powerful paradigm for training models without reliance on labeled data. 
     % SSL
-    \acl{ssl} is a subset of unsupervised learning, where labels are generated from unlabelled training data.
+    Within this domain, \acl{ssl} has gained significant attention, leveraging unlabeled data to generate labels.
     % CL
-    One application of \acl{ssl} is \acl{cl}, which is a technique that is frequently applied in representation learning.
+    A core concept within \acl{ssl} is \acl{cl}, which focuses on learning data representations by contrasting similar and dissimilar sample pairs. 
     % representation learning
-    In this context, the representations of similar samples are supposed to be encoded within close range of each other, 
-    while the representations of dissimilar samples are pushed apart.
-    % instance recognition
-    To this end, pre-text tasks such as instance recognition are used: 
-    Each sample is considered its own class and other samples or transformations of the sample are classified in a binary manner as dis-/similar.
-    % dis-/similar pairs
-    \acl{cl} is used to train the model on pairs of similar and dissimilar samples.
-    The selection of these dis-/similar pairs is of particular interest 
-    since difficult pairs cause great learning opportunities for the model. 
-    While transformations of a sample, i.e. the so-called anchor, are considered similar, 
-    the selection of dissimilar pairs is more challenging.
+    The key idea is to encourage the model to map similar samples closer together in the representation space 
+    while pushing dissimilar samples farther apart.
+    % hard dis-/similar pairs
+    The selection of similar and dissimilar pairs is of particular importance, 
+    as challenging pairs present valuable learning opportunities for the model, 
+    fostering more robust representation learning.
+    % motivation
+    A significant advantage of \acl{cl} in representation learning is its ability to capture the underlying structure of the data, 
+    leading to the development of more robust and generalizable models.
     % this paper
-    This paper reviews different approaches for finding sample pairs in \acl{cl}, with a focus on hard sample mining.
+    This review paper offers a comprehensive examination of various \acl{cl} approaches, 
+    focusing on their foundational principles and the methods employed for pair selection, 
+    while also providing a critical analysis of these techniques.
     
     \keywords{\acl{cl}  \and \acl{ssl} \and Hard sample mining.}
 \end{abstract}
