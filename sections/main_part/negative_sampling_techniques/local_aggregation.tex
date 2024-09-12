@@ -24,15 +24,17 @@ in the feature space.
 In order to construct $C_i$, 
 first $H$ $k$-means clusterings are performed with sligthly different conditions.
 Then, all of $z_i$'s clusters are united to form $C_i$.
-$H$, $k$ are hyperparameters and \citet{local_aggr_2019} set $k=4096$.
+$H$ and $k$ are hyperparameters and \citet{local_aggr_2019} set $k=4096$.
 The authors find that more clusterings, i.e. higher $H$, lead to isotropic clusters since outliers which arise from random processes are averaged out.
 If $H$ is too high compared to the number of clusters $k$, the performance decreases.
+% TODO: k too high?
 They state that $H=3, k=10000$ and $H=10, k=30000$ are better values than $H=10, k=10000$ 
 in terms of ResNet-18 nearest neighbour validation performance.
 
 Finally, the level of \ac{la} $L(C_i,B_i | \theta, x_i)$ is defined as the negative log-likelihood 
 of the feature space representation $z_i$ of $x_i$ being in $C_i$ given $B_i$, 
 i.e., being recognized as a close neighbour given being recognized as a background neighbour.
+% TODO: min vs max
 The loss to minimize is $\mathcal{L} = L(C_i,B_i | \theta, x_i) + \lambda \left\| \theta \right\|^2$.
 \citet{local_aggr_2019} choose to rely on hyperparameter settings from another work rather than conducting a hyperparameter search.
 
