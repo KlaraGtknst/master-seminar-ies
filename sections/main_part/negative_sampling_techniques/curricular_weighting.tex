@@ -3,9 +3,9 @@
 
 \citet{curricular_weighting_2024} propose \curricularWeighting, 
 which is a weighting scheme for the negative samples 
-in the context of \ac{cl}, which emulates human learning \citet{curricular_weighting_2024,curriculum_wang_2022,curriculum_HGNNs_2024}.
+in the context of \ac{cl}, which emulates human learning \citet{curriculum_wang_2022,curriculum_HGNNs_2024}.
 Initially, the model is trained on easy negative samples and gradually prioritizes harder negative samples 
-as displayed in \autoref{fig:curriculum_learning_samples} \citet{curricular_weighting_2024,curriculum_Soviany_2022}.
+as displayed in \autoref{fig:curriculum_learning_samples}. %\citet{curricular_weighting_2024,curriculum_Soviany_2022}.
 Therefore, the weight of hard negative samples is increased over time according to the model performance.
 Furthermore, the authors introduce a $\mathcal{L}_2$ regularization term to mitigate the influence of \acp{fn}.
 
@@ -57,7 +57,7 @@ The resulting plot is depicted in \autoref{fig:gradient_ratio_hard_neg_pos}.
 
 \begin{figure}[!htb] % h = here, t = top, b = bottom, p = page of floats
     \centering
-    \includegraphics[width=120pt]{images/ratio_hard_neg_pos_gradients_only_ratio.png}
+    \includegraphics[width=280pt]{images/ratio_hard_neg_pos_gradients_only_ratio.png}
     \caption{Display of the gradient ratio of hard negative and positive samples throughout training 
     similar to \citet{curricular_weighting_2024}.
     As the training progresses, the model focuses more on hard negative samples, i.e. the ratio increases.
