@@ -11,7 +11,7 @@ The approach forces the clusters to have roughly the same size, i.e. form an equ
 The positive sample $x_{nt}$ for an instance $x_n$ is obtained by applying a 
 random augmentation $t \in \mathcal{T}$ to $x_n$.
 After embedding both the original and the augmented instance, clustering is performed and 
-the loss function is computed as defined in \eqref{eq:swav_loss}.
+the loss function is computed as defined in \Eqref{eq:swav_loss}.
 Opposed to other methods, this approach does not directly encourage similar embeddings but similar 
 cluster assignments for positive pairs.
 However, if both views are similarly encoded they should obtain the same cluster assignment.
@@ -43,7 +43,7 @@ of the desired cluster and the embedding of the instance $z_n$ as the probabilit
 crops of the same image.
 They include two crops of standard size and standard resolution, 
 and $V$ smaller size and low-resolution augmentations.
-The resulting loss function is defined in \eqref{eq:swav_loss_multicrop}.
+The resulting loss function is defined in \Eqref{eq:swav_loss_multicrop}.
 
 \begin{equation}
     L(z_{t_{1}}, \cdots , z_{t_{V+2}})= \sum_{i\in \left\{ 1,2 \right\} }^{}\sum_{v=1}^{V+2} L_{v \neq i}(z_{t_{v}}, q_{t_{i}})

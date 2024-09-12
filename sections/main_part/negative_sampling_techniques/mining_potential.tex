@@ -13,7 +13,7 @@ The authors use both a hard sampling strategy and a soft sampling strategy.
 The hard sampling strategy selects the most similar positive sample from the memory bank, 
 while the soft sampling strategy considers $k$ samples from $NN(q)$ by using a linear combination as the loss.
 The loss is composed of weighted terms where each selected positive sample $i$ is weighted 
-according to its similarity to the query embedding $s_{qi}$ relative to all other positive samples' similarity $s_{qj}$ as displayed in \eqref{eq:ppsm}.
+according to its similarity to the query embedding $s_{qi}$ relative to all other positive samples' similarity $s_{qj}$ as displayed in \Eqref{eq:ppsm}.
 
 \begin{equation}
     w_i = \frac{exp(s_{qi})}{\sum_{j=1}^{k}exp(s_{qj})}

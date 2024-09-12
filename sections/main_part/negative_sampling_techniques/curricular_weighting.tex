@@ -29,7 +29,7 @@ The similarity of the positive pair is denoted $s_{ii'}$ while the similarity of
 If the similarity of a negative pair is bigger than the similarity of the positive pair, 
 i.e. $s_{ij} > s_{ii'}$, the negative pair is considered a hard negative and 
 the weight of the negative sample is multiplied by a factor $w_{ij}$ 
-as illustrated in \eqref{eq:curricular_negative_weighting}.
+as illustrated in \Eqref{eq:curricular_negative_weighting}.
 
 \begin{equation}
     N(i,j,t) = \left\{\begin{array}{ll} s_{ij}, & s_{ij} \le s_{ii'} \\
@@ -51,7 +51,7 @@ As the training progresses, $t$ is increased to assign higher weights $w_{ij} > 
 
 
 By calculating the ratio $r_i(j)$ of the hard negative gradient and positive gradient 
-with respect to the loss for different values of $t$ by \eqref{eq:curricular_weighting_ratio}, 
+with respect to the loss for different values of $t$ by \Eqref{eq:curricular_weighting_ratio}, 
 the authors show that the model gradually focuses on hard negatives.
 The resulting plot is depicted in \autoref{fig:gradient_ratio_hard_neg_pos}.
 
@@ -65,7 +65,7 @@ The resulting plot is depicted in \autoref{fig:gradient_ratio_hard_neg_pos}.
     \label{fig:gradient_ratio_hard_neg_pos}
 \end{figure}
 
-The parameter $t$ is updated according to \eqref{eq:curricular_weighting_t_update}, where $m$ is a momentum encoder.
+The parameter $t$ is updated according to \Eqref{eq:curricular_weighting_t_update}, where $m$ is a momentum encoder.
 Intuitively, $t$ is a moving average of the average similarity of the positive pairs 
 which is implicitly aligned with the model's performance. 
 Since this average similarity is expected to increase over time, so will $t$ \citet{curricular_weighting_2024}.

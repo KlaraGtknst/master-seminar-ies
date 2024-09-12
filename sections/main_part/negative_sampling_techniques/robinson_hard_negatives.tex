@@ -7,7 +7,7 @@ Moreover, via the concentration parameter $\beta$, the user can decide how hard 
 Large values of $\beta$ lead to sampling very hard negative samples.
 The authors of \citet{robinson_contrastive_2021} propose negative samples from $q^-_{\beta}(x^-)$, 
 which enforces $x$, $x^-$ having different classes by conditioning on dissimilar classes.
-By computing a scalar product of both representations $f(x)$, $f(x^-)$ in \eqref{eq:q_beta}, 
+By computing a scalar product of both representations $f(x)$, $f(x^-)$ in \Eqref{eq:q_beta}, 
 they encourage similar represented samples.
 Unfortunately, it is unclear how to sample from $q^-_{\beta}(x^-)$ and thus, 
 the authors propose a way to rewrite the equation to facilitate sampling.
@@ -18,8 +18,8 @@ the authors propose a way to rewrite the equation to facilitate sampling.
 \end{align} 
 
 
-Since sampling could both yield \ac{fn} and \ac{tn}, it is possible to rewrite \eqref{eq:q_beta_minus} 
-displaying both cases in \eqref{eq:fn_tn}.
+Since sampling could both yield \ac{fn} and \ac{tn}, it is possible to rewrite \Eqref{eq:q_beta_minus} 
+displaying both cases in \Eqref{eq:fn_tn}.
 The first term corresponds to the probability of sampling \ac{tn}, i.e. $h(x) \neq h(x^-)$,
  while the second term corresponds to the probability of sampling \ac{fn} with $x \sim x^-$.
 
@@ -31,14 +31,14 @@ The first term corresponds to the probability of sampling \ac{tn}, i.e. $h(x) \n
 The distribution $q^{+}_\beta(x^-)$ can described in more detail.
 Given that $x$ and $x^-$ are from the same class, 
 the probability of sampling $x^-$ is proportional to the exponential of the scalar product of the 
-representations of $x$ and $x^-$ as described in \eqref{eq:q_beta_plus}.
+representations of $x$ and $x^-$ as described in \Eqref{eq:q_beta_plus}.
 
 \begin{align}
     q^{+}_\beta(x^-) &= q_\beta(x^-|h(x) = h(x^-)) &\propto \exp(\beta f(x)^\text{T}f(x^-))\cdot p^+(x^-) 
     \label{eq:q_beta_plus}
 \end{align}
 
-Finally, we can rewrite \eqref{eq:fn_tn} to obtain the desired distribution $q^-_{\beta}(x^-)$ as shown in \eqref{eq:q_beta_minus}.
+Finally, we can rewrite \Eqref{eq:fn_tn} to obtain the desired distribution $q^-_{\beta}(x^-)$ as shown in \Eqref{eq:q_beta_minus}.
 This version of the distribution allows for sampling from $q^-_{\beta}(x^-)$, since we can sample from $q_\beta(x^-) \approx p$ 
 and we can approximate $q^{+}_\beta(x^-)$ by sampling from a set of transformations.    % rejection sampling & Monte Carlo sampling
 
