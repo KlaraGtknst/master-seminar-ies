@@ -5,21 +5,21 @@
 
 % purpose
 According to \citet{mining_manifolds_2018}, the initial representation of the data is obtained by e.g. a pre-trained \ac{cnn}.
-Hard pair mining is performed in order to re-train the network.
+Hard pair mining is performed in order to fine-tune the network.
 
 % idea of positive and negative samples
-For re-training, a combination of different definitions of proximity induces mining 
+For fine-tuning, a combination of different definitions of proximity induces mining 
 for hard positives and negatives as displayed in \autoref{fig:mining_manifolds_vis}.
-Given an anchor, the neighbours on the same manifold which are not neighbours in terms of 
-Euclidean proximity are considered hard positive samples.
+Given an anchor, samples that reside on the same manifold but 
+are not proximate in terms of Euclidean distance are considered hard positive samples.
 These positive samples should be embedded closer to the anchor in the Euclidean space.
-Hard negative samples, on the other hand, are neighbours in Euclidean space, 
-but on different manifolds.
+Conversely, hard negative samples are those that are spatially proximate in Euclidean space 
+yet lie on different manifolds.
 These samples should be embedded further away from the anchor in the Euclidean space.
 %The hard samples are mined from an unordered set of \textit{relevant} samples.
 
 % different neighbourhoods & hard samples
-The authors define the $k$ nearest Euclidean neighbour $NN^e_k$ and 
+The authors denote the set of the $k$ nearest Euclidean neighbours $NN^e_k$ and 
 the $k$ nearest manifold neighbour $NN^m_k$.
 The hard positives are defined as $NN^m_k \textbackslash NN^e_k$. 
 The pool $NN^m_k$ is ordered by descending manifold similarity to the anchor
@@ -55,9 +55,10 @@ $NN^e_k$ is ordered by descending Euclidean distance to the anchor to keep the h
 \citet{mining_manifolds_2018} propose a method where the manifold is estimated by mode-seeking, i.e. a random walk process, 
 on the Euclidean nearest neighbour graph induced by the Euclidean similarity function $s_e$.
 The graph is undirected, weighted and represented by a sparse symmetric adjacency matrix.
-The adjacency matrix consists of the reciprocal $k$ nearest neighbours of each sample. 
+The adjacency matrix is constructed from the reciprocal $k$ nearest neighbours of each sample, 
+where two points are considered reciprocal if each belongs to the $k$ nearest neighbours of the other. 
 To reduce the negative impact of outliers, only reciprocal nearest neighbours are incorporated \citet{diffusion_2017,mining_manifolds_2018,fast_2018}.
-The weighted adjacency matrix entries $a_{ij}$ defined in \eqref{eq:mining_manifolds_adjacency_matrix} from \citet{mining_manifolds_2018} 
+The weighted adjacency matrix entries $a_{ij}$ defined in \Eqref{eq:mining_manifolds_adjacency_matrix} from \citet{mining_manifolds_2018} 
 are calculated via the Euclidean distance between the samples if both nodes are in each other's nearest neighbourhood.
 Diagonal entries are set to zero \citet{mining_manifolds_2018,fast_2018}.
 %They admit that assessing the manifold similarity poses additional computational and memory requirements.
@@ -90,7 +91,7 @@ Since the anchors should be diverse and relevant, they are chosen to be the auth
 % authority score
 Inspired by PageRank, the possibility of random jumps is included in order to ensure convergence to a stationary distribution. 
 The probability of visiting a node is denoted by the authority score $\pi$ 
-which is defined in \eqref{eq:authority_score} from \citet{mode_seeking_2012} 
+which is defined in \Eqref{eq:authority_score} from \citet{mode_seeking_2012} 
 where $p(i,j)$ are the entries of the Markov transition matrix $P$.
 $\pi(j)$ takes into account the probability of visiting a node $j$ from a node $i$ and 
 the probability of a random jump from one of the nodes chosen uniformly at random.
@@ -103,7 +104,7 @@ The authority score $\pi$ can be computed by, for instance, the power method \ci
 \end{equation}
 
 % local neighbours on the manifold: node relevancy 
-\citet{mode_seeking_2012} define node relevancy $\Psi(s,t)$ via \eqref{eq:node_relevancy} where $d(s)$ denotes the out-degree of a node.
+\citet{mode_seeking_2012} define node relevancy $\Psi(s,t)$ via \Eqref{eq:node_relevancy} where $d(s)$ denotes the out-degree of a node.
 To incorporate the reachability of a node, the probability of reaching node $t$ from node $s$ in $k$ steps $p_k(s,t)$ is 
 defined via the $k_{th}$ power of the Markov transition matrix $P$.
 To support similar authority scores between neighbouring nodes, the exponential term including a weighting factor $\gamma$ is included.
@@ -119,7 +120,7 @@ $N_\varepsilon^m(s) =  \left\{ t \in \mathcal{V} | \Psi(s,t) > \varepsilon \righ
 
 % AAS
 They propose the \ac{aas} as a nonparametric estimator of the authority modes.
-A node $s$ is shifted to node $\mathcal{A}(s)$ calculated in \eqref{eq:authority_ascent_shift}. 
+A node $s$ is shifted to node $\mathcal{A}(s)$ calculated in \Eqref{eq:authority_ascent_shift}. 
 This formula chooses the local neighbour $t$ of $s$ that maximizes the difference of the authority scores $\pi$.
 The authors argue that the \ac{aas} is finite and converges since the graph is finite.
 When \ac{aas} is completed, manifolds are represented as clusters.
@@ -160,7 +161,7 @@ Resulting hard positives and negatives are displayed in \autoref{fig:manifold_mi
     Green borders mean that the image belongs to the same class as the anchor,
     whereas red denotes different class images.
     It becomes apparent that the sampled hard positives consist of fewer false positives 
-    as the baseline.
+    than the baseline.
     }
     \label{fig:manifold_mining_qualitative_analysis}
 \end{figure}
