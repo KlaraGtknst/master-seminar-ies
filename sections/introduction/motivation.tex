@@ -5,8 +5,8 @@ which is compared to the positive $x^+$ and negative $x^-$ samples.
 In order to explain why the embedding space proximity of generated samples to the anchor $x$ 
 is relevant to the efficiency during training, 
 one can consider a simple example in Euclidean space.
-Imagine images as input to a \ac{nn}, which projects them onto $f_{\theta}(x) \in \mathbb{R}^d$, 
-where $\theta$ are the parameters of the \ac{nn}.
+Imagine images as input to a \acl{nn}, which projects them onto $f_{\theta}(x) \in \mathbb{R}^d$, 
+where $\theta$ are the parameters of the \acl{nn}.
 The impact of the distance between the anchor $x$ and the positive $x^+$ (negative $x^-$) 
 sample on the loss is illustrated in \autoref{fig:hard_easy_samples_dist_effect_loss}.
 Close negative pairs ($x$, $x^-$) are considered hard negatives \citet{robinson_contrastive_2021}, 
