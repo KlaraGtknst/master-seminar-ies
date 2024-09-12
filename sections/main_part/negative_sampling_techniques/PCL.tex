@@ -1,9 +1,8 @@
 \subsubsection{\acl{pcl}}\label{subsec:PCL}
 
 \citet{PCL_2021} use clustering in the feature space to optimize the sample's representation.
-They assign multiple prototypes of different granularity to each sample.
-The prototypes are found by clustering and 
-they are considered positive samples.
+Each sample is assigned $M$ prototypes, which are obtained through $k_m$-means clustering across various values of $m$.
+These prototypes are classified as positive samples.
 The sample's embedding is enforced to be similar to those of its prototypes by a contrastive loss.
 The so-called prototypical contrastive loss ProtoNCE is optimized using an \ac{em} algorithm 
 as displayed in \autoref{fig:PCL_training}.
@@ -41,10 +40,9 @@ The ProtoNCE loss from \Eqref{eq:ProtoNCE} extends the InfoNCE from \Eqref{eq:In
 by not only enforcing similarity between the sample and 
 one positive sample while retaining dissimilarity to $r$ negative samples, 
 but also considering its prototypes $c^m_s$. 
-To improve the stability of the results, $M$ clusterings with different numbers of clusters $k_m$ are 
-executed.
-Different numbers of clusters lead to different granularity of the prototypes 
-and thus, a hierarchical structure is encoded into the loss function.
+To enhance the stability of the results, $M$ clusterings are performed with varying numbers of clusters $k_m$. 
+The use of different $k_m$ introduces varying levels of granularity among the prototypes, 
+thereby encoding a hierarchical structure into the loss function.
 
 \begin{equation}
     \mathcal{L}_{InfoNCE}= - \sum_{i=1}^{N}\log\frac{\exp \frac{z_i\cdot z_i'}{\tau}}{\sum_{j=0}^{r}\exp \frac{z_i\cdot z_j'}{\tau}}
