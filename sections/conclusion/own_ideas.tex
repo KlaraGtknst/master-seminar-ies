@@ -38,8 +38,8 @@ Conversely, sample pairs in different clusters with the shortest path could be c
     while shortest path pairs of different clusters are considered hard negative (red).]
     {{\includegraphics[width=5cm]{images/Cluster_samples.drawio.png} }}%
     \qquad
-    \subfloat[\centering Visualization of the \ac{svm} approach. 
-    \acp{sv} are displayed as bold points.
+    \subfloat[\centering Visualization of the \acs{svm} approach. 
+    \acsp{sv} are displayed as bold points.
     Red arrows denote (hard) negative pairs while green arrows denote (hard) positive pairs.]
     {{\includegraphics[width=5cm]{images/SVM_samples.png} }}%
     \caption{Samples are displayed as points and their colour denotes their cluster membership.}%
@@ -57,13 +57,13 @@ Vertices in a clique are easy positives and reachable vertices outside the cliqu
 This idea would consider the clique vertices to be interchangeable.
 
 % SVM: SV as negative samples
-Another idea is to use \acp{svm} to generate (hard) samples as visualized in \autoref{fig:graph_svm}b.
+Another idea is to use \acfp{svm} to generate (hard) samples as visualized in \autoref{fig:graph_svm}b.
 Initially, the data is split into two classes. 
 Since true class labels are not available in \ac{cl}, clustering results are used as a proxy.
 Then, a \ac{svm} is trained on the data.
 After training, the decision boundary is determined such that 
 the margin between the clusters is maximal.
-The samples that are closest to the decision boundary are considered as \acp{sv}.
+The samples that are closest to the decision boundary are considered as \acfp{sv}.
 Each pair of \acp{sv} from different sides of the decision boundary is considered a hard negative pair.
 Similarly, distant samples from the decision boundary and their \acp{sv} are considered (hard) positive pairs.
 % Since \ac{svm} is a binary classifier, $k>2$ clusters have to be handled via
