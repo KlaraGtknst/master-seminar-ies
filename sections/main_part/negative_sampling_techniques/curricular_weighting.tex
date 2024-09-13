@@ -41,7 +41,8 @@ $w_{ij}$ is governed by the negative pair's similarity $s_{ij}$ emphasising hard
 and the parameter $t$ which is adapted during training.
 At the beginning of the training process, $t$ is set close to zero and thus, $w_{ij} < 1$ 
 to assign smaller relative weights to hard negatives.
-As the training progresses, $t$ is increased to assign higher weights $w_{ij} > 1$ to hard negatives.
+As the training progresses, $t$ is increased, leading to $w_{ij} > 1$, 
+thereby assigning greater weights to hard negatives.
 
 \begin{equation}
     r_i(j) = \frac{\left| \frac{\partial \mathcal{L}_i}{\partial s_{ij}} \right|}
