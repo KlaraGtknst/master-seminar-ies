@@ -1,10 +1,11 @@
 
-@misc{robinson_contrastive_2021,
+@article{robinson_contrastive_2021,
 	title = {Contrastive {Learning} with {Hard} {Negative} {Samples}},
 	url = {http://arxiv.org/abs/2010.04592},
 	abstract = {How can you sample good negative examples for contrastive learning? We argue that, as with metric learning, contrastive learning of representations benefits from hard negative samples (i.e., points that are difficult to distinguish from an anchor point). The key challenge toward using hard negatives is that contrastive methods must remain unsupervised, making it infeasible to adopt existing negative sampling strategies that use true similarity information. In response, we develop a new family of unsupervised sampling methods for selecting hard negative samples where the user can control the hardness. A limiting case of this sampling results in a representation that tightly clusters each class, and pushes different classes as far apart as possible. The proposed method improves downstream performance across multiple modalities, requires only few additional lines of code to implement, and introduces no computational overhead.},
 	urldate = {2024-06-14},
 	publisher = {arXiv},
+	journal = {ICLR},
 	author = {Robinson, Joshua and Chuang, Ching-Yao and Sra, Suvrit and Jegelka, Stefanie},
 	month = jan,
 	year = {2021},
@@ -14,19 +15,18 @@
 	file = {Contrastive_Learning_with_hard_negative_samples.pdf:/Users/klara/Documents/uni/Master/SoSe24/IES_Seminar/Contrastive_Learning_with_hard_negative_samples.pdf:application/pdf},
 }
 
-@misc{mochi_2020,
+@article{mochi_2020,
 	title = {Hard {Negative} {Mixing} for {Contrastive} {Learning}},
 	url = {http://arxiv.org/abs/2010.01028},
 	abstract = {Contrastive learning has become a key component of self-supervised learning approaches for computer vision. By learning to embed two augmented versions of the same image close to each other and to push the embeddings of different images apart, one can train highly transferable visual representations. As revealed by recent studies, heavy data augmentation and large sets of negatives are both crucial in learning such representations. At the same time, data mixing strategies either at the image or the feature level improve both supervised and semi-supervised learning by synthesizing novel examples, forcing networks to learn more robust features. In this paper, we argue that an important aspect of contrastive learning, i.e., the effect of hard negatives, has so far been neglected. To get more meaningful negative samples, current top contrastive self-supervised learning approaches either substantially increase the batch sizes, or keep very large memory banks; increasing the memory size, however, leads to diminishing returns in terms of performance. We therefore start by delving deeper into a top-performing framework and show evidence that harder negatives are needed to facilitate better and faster learning. Based on these observations, and motivated by the success of data mixing, we propose hard negative mixing strategies at the feature level, that can be computed on-the-fly with a minimal computational overhead. We exhaustively ablate our approach on linear classification, object detection and instance segmentation and show that employing our hard negative mixing procedure improves the quality of visual representations learned by a state-of-the-art self-supervised learning method.},
 	urldate = {2024-06-14},
 	publisher = {arXiv},
+	journal = {NeurIPS},
 	author = {Kalantidis, Yannis and Sariyildiz, Mert Bulent and Pion, Noe and Weinzaepfel, Philippe and Larlus, Diane},
 	month = dec,
 	year = {2020},
 	note = {arXiv:2010.01028},
 	keywords = {Computer Science - Machine Learning, Computer Science - Computer Vision and Pattern Recognition},
-	annote = {Comment: Accepted at NeurIPS 2020. Project page with pretrained models: https://europe.naverlabs.com/mochi},
-	file = {Hard_negavte_mixing_for_contrastive_learning.pdf:/Users/klara/Documents/uni/Master/SoSe24/IES_Seminar/Hard_negavte_mixing_for_contrastive_learning.pdf:application/pdf},
 }
 
 @inproceedings{chuang_debiased_2020,
