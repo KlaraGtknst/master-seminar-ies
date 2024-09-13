@@ -10,18 +10,18 @@ At each step during training of the embedding function $f_\theta: \mathcal{X} \r
 two sets of neighbours are identified for each datapoint's embedding $z_i$ 
 which are illustrated in \autoref{fig:la_bi_ci}.
 The first set $C_i$ contains $z_i$'s close neighbours in the feature space, while
-the second set $B_i$ contains $z_i$'s background neighbours.
+the second set $B_i$ contains $z_i$'s so-called background neighbours.
 $B_i$ is used as a means to judge distance and similarity, 
 while $C_i$'s members should be embedded closer to $z_i$.
+% backgound neighbours: no better explanation found as to why they are called background neighbours -> own definiton!
+The background neighbours $B_i$ are those instances that, 
+while not as similar or proximate as close neighbours $C_i$, 
+still provide contextual information that can contribute 
+to $z_i$'s representation. 
 In other words, $C_i$ can be considered the set of positive samples while 
 $B_i$ denotes the set of negative samples.
-The level of \ac{la} $L(C_i,B_i | \theta, x_i)$ 
-characterizes the relative level of closeness within $C_i$ compared to $B_i$.
-It is defined as the negative log-likelihood 
-of the feature space representation $z_i$ of $x_i$ being in $C_i$ given $B_i$, 
-i.e., being recognized as a close neighbour given being recognized as a background neighbour.
-$L(C_i,B_i | \theta, x_i)$ should be maximized.
 
+% construction of Ci and Bi & hyperparameters
 The set $B_i$ consists of the $k$ nearest neighbours of $z_i$ in terms of cosine distance 
 in the feature space.
 In order to construct $C_i$, 
@@ -47,3 +47,11 @@ The authors find that more clusterings, i.e. higher $H$, lead to isotropic clust
     The arrows denote influences between the neighbours.}
     \label{fig:la_bi_ci}
 \end{figure}
+
+% local aggregation
+The level of \ac{la} $L(C_i,B_i | \theta, x_i)$ 
+characterizes the relative level of closeness within $C_i$ compared to $B_i$.
+It is defined as the negative log-likelihood 
+of the feature space representation $z_i$ of $x_i$ being in $C_i$ given $B_i$, 
+i.e., being recognized as a close neighbour given being recognized as a background neighbour.
+$L(C_i,B_i | \theta, x_i)$ should be maximized.
