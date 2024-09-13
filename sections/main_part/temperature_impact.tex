@@ -3,7 +3,8 @@ The parameter $\tau$ is called temperature.
 \citet{CL_temp_2021} have carried out an exhaustive study on the impact of temperature on the loss function of \ac{cl}.
 % define hardness
 They found that the contrastive loss function optimizes hard samples by penalizing them according to their hardness.
-In the context of \ac{cl}, hardness refers to the difficulty of distinguishing between samples.
+In the context of \ac{cl}, hardness refers to the difficulty associated with accurately classifying 
+a sample as either positive or negative in relation to a given anchor.
 Hard samples are those that pose significant challenges for the model: 
 They may be hard positives, which are distant from the anchor yet from the same class, 
 or hard negatives, which are misleadingly close to the anchor despite being from a different class.

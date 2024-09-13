@@ -11,6 +11,11 @@ The impact of the distance between the anchor $x$ and the positive $x^+$ (negati
 sample on the loss is illustrated in \autoref{fig:hard_easy_samples_dist_effect_loss}.
 Close negative pairs ($x$, $x^-$) are considered hard negatives \citep{robinson_contrastive_2021}, 
 while distant positive pairs ($x$, $x^+$) are similarly viewed as hard positives.
+
+% define hardness
+In the context of \ac{cl}, hardness refers to the difficulty associated with accurately classifying 
+a sample as either positive or negative in relation to a given anchor, 
+reflecting both the inherent complexity of the sample and the challenge it presents to the model.
 Generally, models tend to find nearby negative pairs ($x$, $x^-$) more challenging than distant negative pairs, 
 increasing the likelihood of incorrectly classifying them as positives.
 As difficult samples often result in higher loss values, 
