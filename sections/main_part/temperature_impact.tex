@@ -11,7 +11,7 @@ or hard negatives, which are misleadingly close to the anchor despite being from
 \begin{figure}[!htb] % h = here, t = top, b = bottom, p = page of floats
     \centering
     \includegraphics[width=280pt]{images/gradient_ratio_dep_on_temperature.png}
-    \caption{Penality (y-axis) depending on similarity of samples (x-axis) from from \citet{CL_temp_2021}. 
+    \caption{Penality (y-axis) depending on similarity of samples (x-axis) from \citet{CL_temp_2021}. 
     For small values of $\tau$, similar samples, i.e. x-axis values close to $1.0$, receive high penalties.
     If $\tau$ is too small, only the closest one or two points are penalized and thus, the performance deteriorates.
     As $\tau \rightarrow 1$, the magnitude of the penalty is similar for all negative samples.
@@ -33,7 +33,7 @@ or hard negatives, which are misleadingly close to the anchor despite being from
 As displayed in \autoref{fig:gradient_ratio_dep_on_temperature}, 
 small temperatures $\tau$ lead to a greater penalty for very hard negative samples, those that are similar to the anchor.
 Consequently, the representations of these samples are pushed further apart, 
-resulting in a more uniformly distributed embedding space \citet{CL_temp_2021,grape_2024}. 
+resulting in a more uniformly distributed embedding space \citep{CL_temp_2021,grape_2024}. 
 This effect is further demonstrated in \autoref{fig:tsne_dep_on_temperature}.
 However, when $\tau$ is too small, the embedding spaces' semantic structure deteriorates.
 For $\tau \rightarrow \infty$, the loss function's hardness-aware property disappears and hard negatives are not penalized anymore.

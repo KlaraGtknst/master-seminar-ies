@@ -1,7 +1,7 @@
 \subsection{\acl{moco}}\label{subsec:MoCo}
 % Momentum Contrast (MoCo)
-The \ac{moco} is described as a compromise between a complete memory bank and large batches \citet{mochi_2020}.
+The \ac{moco} is described as a compromise between a complete memory bank and large batches \citep{mochi_2020}.
 It is a second encoder that trails the main anchor encoder with a higher momentum.
 Once a positive pair is selected, all $K$ negative samples in $Q$ are encoded with the current \ac{moco}.
-Afterwards, the \ac{moco} is updated with the current anchor encoder and higher momentum  \citet{mochi_2020,PCL_2021}. 
+Afterwards, the \ac{moco} is updated with the current anchor encoder and higher momentum  \citep{mochi_2020,PCL_2021}. 
 These steps are repeated for each positive pair.

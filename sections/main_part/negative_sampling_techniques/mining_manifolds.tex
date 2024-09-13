@@ -57,12 +57,12 @@ on the Euclidean nearest neighbour graph induced by the Euclidean similarity fun
 The graph is undirected, weighted and represented by a sparse symmetric adjacency matrix.
 The adjacency matrix is constructed from the reciprocal $k$ nearest neighbours of each sample, 
 where two points are considered reciprocal if each belongs to the $k$ nearest neighbours of the other. 
-To reduce the negative impact of outliers, only reciprocal nearest neighbours are incorporated \citet{diffusion_2017,mining_manifolds_2018,fast_2018}.
+To reduce the negative impact of outliers, only reciprocal nearest neighbours are incorporated \citep{diffusion_2017,mining_manifolds_2018,fast_2018}.
 The weighted adjacency matrix entries $a_{ij}$ defined in \Eqref{eq:mining_manifolds_adjacency_matrix} from \citet{mining_manifolds_2018} 
 are calculated via the Euclidean distance between the samples if both nodes are in each other's nearest neighbourhood.
-Diagonal entries are set to zero \citet{mining_manifolds_2018,fast_2018}.
+Diagonal entries are set to zero \citep{mining_manifolds_2018,fast_2018}.
 %They admit that assessing the manifold similarity poses additional computational and memory requirements.
-The manifold is computed once at the beginning \citet{mining_manifolds_2018}.
+The manifold is computed once at the beginning \citep{mining_manifolds_2018}.
 
 \begin{equation}
     a_{ij} = \begin{cases}
@@ -80,13 +80,13 @@ The manifold is computed once at the beginning \citet{mining_manifolds_2018}.
 
 % authority modes
 While traditional mode-seeking relies on metric features, such as distances, mode-seeking on graphs 
-uses the concept of random walks instead \citet{mode_seeking_2012}.
+uses the concept of random walks instead \citep{mode_seeking_2012}.
 A random walk, i.e. a linear combination of the identity matrix and a scaled version of the adjacency matrix, is simulated multiple times on the graph.
 \citet{mode_seeking_2012} define the so-called authority modes on a graph 
 as the most frequently visited nodes by random walks among their local neighbours.
 They correspond to the local maxima of the underlying probability distribution of random walks over the graph.
 % selection of anchors
-Since the anchors should be diverse and relevant, they are chosen to be the authority modes \citet{mining_manifolds_2018}.
+Since the anchors should be diverse and relevant, they are chosen to be the authority modes \citep{mining_manifolds_2018}.
 
 % authority score
 Inspired by PageRank, the possibility of random jumps is included in order to ensure convergence to a stationary distribution. 
@@ -96,7 +96,7 @@ where $p(i,j)$ are the entries of the Markov transition matrix $P$.
 $\pi(j)$ takes into account the probability of visiting a node $j$ from a node $i$ and 
 the probability of a random jump from one of the nodes chosen uniformly at random.
 \citet{mode_seeking_2012} set $\alpha$ to $0.9$. 
-The authority score $\pi$ can be computed by, for instance, the power method \citet{mode_seeking_2012,PageRank_2004}.
+The authority score $\pi$ can be computed by, for instance, the power method \citep{mode_seeking_2012,PageRank_2004}.
 
 \begin{equation}
     \pi(j) = \alpha \sum_{i \in \mathcal{V}}^{}  \pi(i)p(i,j) + (1-\alpha)\frac{1}{N} , \text{ where } p(i,j) = \frac{a_{ij} }{\sum_{k \in \mathcal{V}}^{}a_{ik} } 
@@ -111,7 +111,7 @@ To support similar authority scores between neighbouring nodes, the exponential 
 $\Psi(s,t)$ is not symmetric and depends on the random walk step $k$.
 The authors propose to use the node relevancy $\Psi(s,t)$ for a node $s$ to determine the manifold neighbours $N_\varepsilon^m(s)$ for $s$ 
 via the usage of a threshold $\varepsilon$: 
-$N_\varepsilon^m(s) =  \left\{ t \in \mathcal{V} | \Psi(s,t) > \varepsilon \right\} \cup \left\{ s \right\}$ \citet{mode_seeking_2012}.
+$N_\varepsilon^m(s) =  \left\{ t \in \mathcal{V} | \Psi(s,t) > \varepsilon \right\} \cup \left\{ s \right\}$ \citep{mode_seeking_2012}.
 
 \begin{equation}
     \Psi(s,t) = d(s) p_k(s,t) \exp(-\gamma \left\{  \pi(t) - \pi(s)  \right\}^2)\text{, where } d(s) = \sum_{j\in \mathcal{V}}^{}a_{sj}
@@ -139,7 +139,7 @@ When \ac{aas} is completed, manifolds are represented as clusters.
 The authors propose multiple loss functions to train the model.
 They, for instance, apply the contrastive loss $l_c(x^r, x^+, x^-)= \left\| x^r - x^+ \right\|^2 + \left[ m - \left\| x^r - x^- \right\| \right]^2$, 
 the triplet loss $l_t(x^r, x^+, x^-)= \left[ m +  \left\| x^r - x^+ \right\| ^2 - \left\| x^r - x^- \right\| \right]^2$, 
-and weighted versions of both contrastive and triplet loss, where the loss is multiplied by the manifold similarity of anchor and positive sample \citet{mining_manifolds_2018}.
+and weighted versions of both contrastive and triplet loss, where the loss is multiplied by the manifold similarity of anchor and positive sample \citep{mining_manifolds_2018}.
 $m$ is a margin parameter and $x^r$ is the representation of the anchor.
 
 % examples
@@ -170,7 +170,7 @@ Resulting hard positives and negatives are displayed in \autoref{fig:manifold_mi
     \centering
     \includegraphics[width=360pt]{images/mining_manifold_examples.png}
     \caption{Illustration Oxford5k and Paris6k images crawled from Flickr from \citet{mining_manifolds_2018}.
-    The dataset contains multiple images for each landmark building, i.e. class \citet{manifold_dataset}.
+    The dataset contains multiple images for each landmark building, i.e. class \citep{manifold_dataset}.
     The anchor is denoted $x^r$.
     A selection of hard positives from $P^+(x^r)$ is compared to the 
     baseline approach by sampling from the closest neighbours to $x^r$ in 

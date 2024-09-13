@@ -3,7 +3,7 @@
 
 \citet{curricular_weighting_2024} propose \curricularWeighting, 
 which is a weighting scheme for the negative samples 
-in the context of \ac{cl}, which emulates human learning \citet{curriculum_wang_2022,curriculum_HGNNs_2024}.
+in the context of \ac{cl}, which emulates human learning \citep{curriculum_wang_2022,curriculum_HGNNs_2024}.
 Initially, the model is trained on easy negative samples and gradually prioritizes harder negative samples 
 as displayed in \autoref{fig:curriculum_learning_samples}. %\citet{curricular_weighting_2024,curriculum_Soviany_2022}.
 Therefore, the weight of hard negative samples is increased over time according to the model performance.
@@ -68,7 +68,7 @@ The resulting plot is depicted in \autoref{fig:gradient_ratio_hard_neg_pos}.
 The parameter $t$ is updated according to \Eqref{eq:curricular_weighting_t_update}, where $m$ is a momentum encoder.
 Intuitively, $t$ is a moving average of the average similarity of the positive pairs 
 which is implicitly aligned with the model's performance. 
-Since this average similarity is expected to increase over time, so will $t$ \citet{curricular_weighting_2024}.
+Since this average similarity is expected to increase over time, so will $t$ \citep{curricular_weighting_2024}.
 
 \begin{equation}
     t^{(k)} = m \cdot t^{(k-1)} + (1-m) \cdot \frac{1}{N}\sum_{i=1}^{N}s^{k}_{ii'} 
@@ -78,7 +78,7 @@ Since this average similarity is expected to increase over time, so will $t$ \ci
 \citeauthor{curricular_weighting_2024} stress that in order to avoid losing the semantic structure of the embedding space 
 due to highly weighted \acp{fn}, weights $w_{ij} > 1$ are $\mathcal{L}_2$ regularized.
 The comparison of the model's accuracy with and without the proposed regularization approach on both the CIFAR-10 and the STL-10 datasets 
-support the usage of regularization \citet{curricular_weighting_2024}.
+support the usage of regularization \citep{curricular_weighting_2024}.
 
 % ablation study
 Moreover, the authors conduct an ablation study to investigate the impact of the proposed weighting scheme 
