@@ -1,12 +1,11 @@
 \subsubsection{\acl{pcl}}\label{subsec:PCL}
 
 \citet{PCL_2021} use clustering in the feature space to optimize the sample's representation.
-Each sample is assigned $M$ prototypes, which are obtained through $k_m$-means clustering across various values of $m$.
-These prototypes are classified as positive samples.
-The sample's embedding is enforced to be similar to those of its prototypes by a contrastive loss.
+Each sample is associated with $M$ prototypes, which are obtained through $k_m$-means clustering across various values of $m$.
+These prototypes, represented by cluster centroids, act as latent variables and are classified as positive samples. 
+A contrastive loss is applied to ensure that the sample's embedding aligns closely with its assigned prototypes.
 The so-called prototypical contrastive loss ProtoNCE is optimized using an \ac{em} algorithm 
 as displayed in \autoref{fig:PCL_training}.
-The prototypes are latent variables.
 
 \begin{figure}[!htb] % h = here, t = top, b = bottom, p = page of floats
     \centering
@@ -26,7 +25,6 @@ The prototypes are latent variables.
 $k$-means clustering is used to find the prototypes in the E-step.
 The clustering is performed on the samples' embeddings obtained from the momentum encoder, 
 whose parameters are a moving average of the main encoder's parameters and thus, smoother \citep{PCL_2021}.
-The prototypes are the cluster centroids.
 
 % M-step
 The M-step updates the network parameters $\theta$ by optimizing the ProtoNCE loss.
