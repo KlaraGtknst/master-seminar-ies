@@ -7,10 +7,11 @@ However, this approach is prone to two issues \citet{robinson_contrastive_2021,m
 \end{enumerate}
 
 % oracle learning
-If \acp{fn} \cite{grape_2024,curricular_weighting_2024,progcl_2022}, i.e. 
+If \acp{fn}, i.e. 
 samples that belong to the same latent class as the anchor but are incorrectly treated as negatives, 
 are selected during hard negative mining, 
-this results in samples from the same class being pushed farther apart in the embedding space. 
+this results in samples from the same class being pushed farther apart in the embedding space 
+\cite{grape_2024,curricular_weighting_2024,progcl_2022}. 
 Such incorrect separation can degrade the quality of the learned representations 
 by disrupting the model's ability to cluster similar instances effectively.
 % To avoid performance deterioration, the so-called class oracle approach 
