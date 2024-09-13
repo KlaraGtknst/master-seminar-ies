@@ -9,7 +9,7 @@ Imagine images as input to a \ac{nn}, which projects them onto $f_{\theta}(x) \i
 where $\theta$ are the parameters of the \ac{nn}.
 The impact of the distance between the anchor $x$ and the positive $x^+$ (negative $x^-$) 
 sample on the loss is illustrated in \autoref{fig:hard_easy_samples_dist_effect_loss}.
-Close negative pairs ($x$, $x^-$) are considered hard negatives \citet{robinson_contrastive_2021}, 
+Close negative pairs ($x$, $x^-$) are considered hard negatives \citep{robinson_contrastive_2021}, 
 while distant positive pairs ($x$, $x^+$) are similarly viewed as hard positives.
 Generally, models tend to find nearby negative pairs ($x$, $x^-$) more challenging than distant negative pairs, 
 increasing the likelihood of incorrectly classifying them as positives.

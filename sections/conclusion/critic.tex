@@ -5,7 +5,7 @@ some critical points arise which will be discussed in the following.
 
 % positive augmentations
 Many scientists have led their paper with the statement that the generation of positive samples has already been subject to many studies.
-However, the majority of the papers subject to this work used random transformations to generate positive samples \citet{robinson_contrastive_2021,adversarial_2020,swav_2020}.
+However, the majority of the papers subject to this work used random transformations to generate positive samples \citep{robinson_contrastive_2021,adversarial_2020,swav_2020}.
 While the effort invested in initially identifying effective augmentation strategies for positive samples is evident, 
 the consideration given to positive sample generation in these papers appears relatively superficial.
 
@@ -25,14 +25,14 @@ the manifold structure could change during the training process of the embedding
 Therefore, recalculation of the manifold could be of interest.
 
 % clustering-based approaches
-Some clustering-based approaches such as \ac{pcl} \citet{PCL_2021} seem to need $M$ clusterings per iteration 
+Some clustering-based approaches such as \ac{pcl} \citep{PCL_2021} seem to need $M$ clusterings per iteration 
 which seems computationally expensive. 
 However, since a batch of samples changes the embedding, recalculation of the clusters is necessary.
 Nevertheless, the computational costs of this approach should be considered when evaluating \ac{pcl}'s overall usability.
 
 % cosine similarity
 Even though most papers use the dot product to calculate the similarity between samples, 
-\citet{mining_potential_2024} and \ac{la} \citet{local_aggr_2019} use cosine similarity 
+\citep{mining_potential_2024} and \ac{la} \citep{local_aggr_2019} use cosine similarity 
 without providing further justification. % do authors say why they use it? LA: No, Potential: No
 The cosine similarity is a measure of the angle between two vectors and does not consider the magnitude.
 Therefore, the use of cosine similarity to measure the similarity between samples appears questionable.
@@ -43,13 +43,13 @@ The curse of dimensionality states that in high-dimensional spaces, distances be
 Consequently, cluster-based approaches in high-dimensional spaces might not be as effective as in lower-dimensional spaces.
 Since dimensionality reduction always leads to information loss, 
 one has to consider this drawback when using clustering-based approaches 
-such as \ac{drc} \citet{DRC_2020}, \ac{swav} \citet{swav_2020}, \ac{pcl} \citet{PCL_2021}, 
-\ac{la} \citet{local_aggr_2019} or mining manifolds \citet{mining_manifolds_2018}.
+such as \ac{drc} \citep{DRC_2020}, \ac{swav} \citep{swav_2020}, \ac{pcl} \citep{PCL_2021}, 
+\ac{la} \citep{local_aggr_2019} or mining manifolds \citep{mining_manifolds_2018}.
 To avoid information loss, i.e. working on the original high-dimensional data, 
-the usage of approaches such as \ac{mochi} \citet{mochi_2020} seems beneficial.
+the usage of approaches such as \ac{mochi} \citep{mochi_2020} seems beneficial.
 
 % DRC & L_{ap}
-The clustering-based approach \ac{drc} \citet{DRC_2020} was briefly discussed in \autoref{subsec:SampleViaClustering}.
+The clustering-based approach \ac{drc} \citep{DRC_2020} was briefly discussed in \autoref{subsec:SampleViaClustering}.
 \ac{drc} aims to address the issue of existing methods enforcing the representations of samples 
 and their augmentations to be assigned to the same cluster regardless of their \ac{af}.
 Hence, they consider both the \ac{af} and the \ac{ap} during clustering.

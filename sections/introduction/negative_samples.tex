@@ -1,6 +1,6 @@
 % unsupervised learning
 Simple selection techniques of negative samples include uniform sampling from the dataset or batch.
-However, this approach is prone to two issues \citet{robinson_contrastive_2021,mining_potential_2024}:
+However, this approach is prone to two issues \citep{robinson_contrastive_2021,mining_potential_2024}:
 \begin{enumerate}
     \item Selected samples are not necessarily hard negatives since the approach does not consider the embedding space proximity.
     \item Selected samples might actually belong to the same class as the anchor and thus, can be denoted \ac{fn}.
@@ -16,4 +16,4 @@ Such incorrect separation can degrade the quality of the learned representations
 by disrupting the model's ability to cluster similar instances effectively.
 % To avoid performance deterioration, the so-called class oracle approach 
 % removes the \acp{fn} from the set of negative samples and thus, 
-% increases the performance of the model \citet{mochi_2020}.
+% increases the performance of the model \citep{mochi_2020}.
