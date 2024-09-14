@@ -124,6 +124,8 @@ A node $s$ is shifted to node $\mathcal{A}(s)$ calculated in \Eqref{eq:authority
 This formula chooses the local neighbour $t$ of $s$ that maximizes the difference of the authority scores $\pi$.
 The authors argue that the \ac{aas} is finite and converges since the graph is finite.
 When \ac{aas} is completed, manifolds are represented as clusters.
+% examples
+Resulting hard positives and negatives are displayed in \autoref{fig:manifold_mining_qualitative_analysis} and \autoref{fig:manifold_mining_examples}.
 
 \begin{equation}
     \mathcal{A}(s) = \underset{t \in \mathcal{N_\varepsilon}(s)}{\text{argmax}} \left\{ p_k(s,t)\left[ \pi(t)-\pi(s) \right] \right\}
@@ -135,19 +137,9 @@ When \ac{aas} is completed, manifolds are represented as clusters.
 % Hence, outlier clusters can be identified by low sums of authority values.
 
 
-% loss functions
-The authors propose multiple loss functions to train the model.
-They, for instance, apply the contrastive loss $l_c(x^r, x^+, x^-)= \left\| x^r - x^+ \right\|^2 + \left[ m - \left\| x^r - x^- \right\| \right]^2$, 
-the triplet loss $l_t(x^r, x^+, x^-)= \left[ m +  \left\| x^r - x^+ \right\| ^2 - \left\| x^r - x^- \right\| \right]^2$, 
-and weighted versions of both contrastive and triplet loss, where the loss is multiplied by the manifold similarity of anchor and positive sample \citep{mining_manifolds_2018}.
-$m$ is a margin parameter and $x^r$ is the representation of the anchor.
-
-% examples
-Resulting hard positives and negatives are displayed in \autoref{fig:manifold_mining_qualitative_analysis} and \autoref{fig:manifold_mining_examples}.
-
 \begin{figure}[!htb] % h = here, t = top, b = bottom, p = page of floats
     \centering
-    \includegraphics[width=360pt]{images/mining_manifold_qualitative_analysis.png}
+    \includegraphics[width=300pt]{images/mining_manifold_qualitative_analysis.png}
     \caption{Illustration of CUB200-2011 from \citet{mining_manifolds_2018}.
     The anchor is denoted $x^r$.
     A selection of hard positives from $P^+(x^r)$ is compared to the 
@@ -184,3 +176,10 @@ Resulting hard positives and negatives are displayed in \autoref{fig:manifold_mi
     }
     \label{fig:manifold_mining_examples}
 \end{figure}
+
+% loss functions
+The authors propose multiple loss functions to train the model.
+They, for instance, apply the contrastive loss $l_c(x^r, x^+, x^-)= \left\| x^r - x^+ \right\|^2 + \left[ m - \left\| x^r - x^- \right\| \right]^2$, 
+the triplet loss $l_t(x^r, x^+, x^-)= \left[ m +  \left\| x^r - x^+ \right\| ^2 - \left\| x^r - x^- \right\| \right]^2$, 
+and weighted versions of both contrastive and triplet loss, where the loss is multiplied by the manifold similarity of anchor and positive sample \citep{mining_manifolds_2018}.
+$m$ is a margin parameter and $x^r$ is the representation of the anchor.

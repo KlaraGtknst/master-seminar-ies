@@ -20,18 +20,6 @@ where larger $k_m$ values produce more (granular) clusters,
 the diversity of clusters could be further enhanced by incorporating alternative clustering algorithms. 
 This would introduce a broader range of cluster shapes and structures.
 
-% AE instead of CNN
-% CNNs and Autoencoders are not mutaly exclusive: CNN = architecture, VAE = Framework, can be implemented using CNNs
-% Since most techniques discussed in this work have image input data \acp{cnn} seem to be a natural choice for generating embeddings.
-% However, using \acp{ae} to generate embeddings could be a promising alternative.
-% Since \acp{ae} are trained using the reconstruction error of the input and output, no additional data is necessary.
-% This idea is purely speculative and has not been tested yet.
-
-% shortest path in graph
-If the data is clustered as displayed in \autoref{fig:graph_svm}a,
-the sample pairs within a cluster that have the longest shortest path could be considered as hard positive samples.
-Conversely, sample pairs in different clusters with the shortest path could be considered as hard negative samples.
-
 \begin{figure}[!htb]%
     \centering
     \subfloat[\centering Longest shortest path pairs within a cluster are considered hard positive pairs (green) 
@@ -45,6 +33,12 @@ Conversely, sample pairs in different clusters with the shortest path could be c
     \caption{Samples are displayed as points and their colour denotes their cluster membership.}%
     \label{fig:graph_svm}%
 \end{figure}
+
+% shortest path in graph
+If the data is clustered as displayed in \autoref{fig:graph_svm}a,
+the sample pairs within a cluster that have the longest shortest path could be considered as hard positive samples.
+Conversely, sample pairs in different clusters with the shortest path could be considered as hard negative samples.
+
 
 % SNA measures
 Even if the input data is not initially a graph, one could transform it into a graph via, for instance, 
