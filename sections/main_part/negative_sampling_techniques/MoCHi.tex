@@ -19,7 +19,7 @@ The definition of \ac{mochi}($N, s, s'$) is as follows:
 For both approaches to generating negative samples, the authors use the same memory bank $Q$.
 Given a fixed anchor, firstly, $Q$ is ordered in descending similarity to the anchor representation    
 in the feature space producing $\tilde{Q}$.
-The similarity between $n_j \in \tilde{Q}$ and the query $q$ is calculated via 
+The similarity between $n_j \in \tilde{Q}$ and the anchor $q$ is calculated via 
 a scaled dot product of both samples.
 Secondly, all but the first, i.e. most similar, $N$ samples are discarded from $\tilde{Q}$.
 % first approach
@@ -77,7 +77,7 @@ The authors listed modifications to \ac{mochi} that lead to inferior performance
 They tried to define the mixing coefficient via the similarity of the hard negative samples 
 to the anchor. % how negative the sample is 
 Moreover, they introduced non-uniformity when sampling $n_i, n_j$ from $\tilde{Q}$ by defining a 
-probability distribution over similarities to the query. % too hard samples
+probability distribution over similarities to the anchor. % too hard samples
 Alternatively, they proposed omitting the parameters $s, s'$ and 
 sampling hard negatives using alternately approaches 1 and 2 until $N\%$ of the top samples in 
 $\tilde{Q}$ correspond to synthesized samples.
