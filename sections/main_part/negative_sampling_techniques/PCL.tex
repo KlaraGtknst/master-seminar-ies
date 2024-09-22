@@ -35,8 +35,8 @@ and an isotropic Gaussian distribution of the sample's embeddings around the pro
 
 % ProtoNCE loss
 The ProtoNCE loss from \Eqref{eq:ProtoNCE} extends the InfoNCE from \Eqref{eq:InfoNCE} 
-by not only enforcing similarity between the sample and 
-one positive sample while retaining dissimilarity to $r$ negative samples, 
+by not only enforcing similarity between the sample $z_i$ and 
+one positive sample $z_i'$ while retaining dissimilarity to $r$ negative samples $z_j'$, 
 but also considering its prototypes $c^m_s$. 
 To enhance the stability of the results, $M$ clusterings are performed with varying numbers of clusters $k_m$. 
 The use of different $k_m$ introduces varying levels of granularity among the prototypes, 
