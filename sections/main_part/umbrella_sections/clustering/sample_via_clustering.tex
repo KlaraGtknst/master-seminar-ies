@@ -15,7 +15,7 @@ This approach is motivated by their claim that existing methods cluster dissimil
 due to the usage of the maximum sensitivity of the softmax function used during cluster assignment.
 
 In contrast to methods like \ac{drc}, \ac{swav} does not explicitly promote similar embeddings for positive pairs. 
-Instead, it focuses on encouraging similar cluster assignments \citep{swav_2020}. 
+Instead, it focuses on encouraging similar cluster assignments of positive pairs \citep{swav_2020}. 
 The core idea is to swap the cluster assignments between two positive samples of the same image when calculating the loss, 
 thereby promoting consistency in cluster assignments across similar instances. 
 This approach indirectly aligns the embeddings of positive pairs by 
