@@ -28,6 +28,9 @@ The distribution is fitted using the \ac{em} algorithm on a subset of samples fo
 % scheme 1: ProGCL-weight
 Building on this observation, the authors propose incorporating both the probability of a sample being a \ac{tn} and 
 the sample's similarity to the anchor, referred to as its hardness, into the negative sample selection process. 
+The probability of a sample being a \ac{tn} is derived using Bayes' theorem in conjunction with 
+the probability density function of a Beta Mixture Model, 
+which is trained on a ground-truth dataset comprised of \acp{tn}.
 It is important to note that the anchor is not a cluster center, 
 but rather the sample from which augmentations are derived.
 
